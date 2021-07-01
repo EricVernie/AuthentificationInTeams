@@ -1,0 +1,66 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.9",
+  "version": "1.0.0",
+  "id": "[TEAMS APP ID]",
+  "packageName": "com.teams.ev.fdd",
+  "developer": {
+    "name": "auteur",
+    "websiteUrl": "https://xxx.xxxx.com",
+    "privacyUrl": "https://xxx.xxxx.com/privacy",
+    "termsOfUseUrl": "https://xxx.xxxx.com/termsofuse"
+  },
+  "icons": {
+    "color": "bot-icon-192x192.png",
+    "outline": "bot-icon-outline-32x32.png"
+  },
+  "name": {
+    "short": "Training Auth",
+    "full": "Training GSP"
+  },
+  "description": {
+    "short": "Training Auth in Teams 2021-06",
+    "full": "Demos Teams"
+  },
+  "accentColor": "#0EA20E",
+  "staticTabs": [
+    {
+      "entityId": "tabsso",
+      "name": "SSO",
+      "contentUrl": "https://xxx.xxxx.com/sso.html",
+      "websiteUrl": "https://xxx.xxxx.com",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "tabsilent",
+      "name": "Silent",
+      "contentUrl": "https://xxx.xxxx.com/tabsilentauthenticationstart.html",
+      "websiteUrl": "https://xxx.xxxx.com",
+      "scopes": [
+        "personal"
+      ]
+    },
+    {
+      "entityId": "tabauthentication",
+      "name": "Authentication",
+      "contentUrl": "https://xxx.xxxx.com/tabauthenticate.html",
+      "websiteUrl": "https://xxx.xxxx.com",
+      "scopes": [
+        "personal"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.xxxx.com"
+  ],
+  "webApplicationInfo": {
+    "id": "[AAD CLIENT ID]",
+    "resource": "api://xxx.xxxx.com/[AAD CLIENT ID]"
+  }
+}

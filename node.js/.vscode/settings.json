@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/9a96981c-4056-48b7-9301-7c2757548bcf/resourceGroups/training-teams-rg/providers/Microsoft.Web/sites/oauthinteamnode",
+    "appService.deploySubpath": "."
+}

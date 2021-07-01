@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Récupère le jeton client Teams et le transmet côté serveur pour obtenir un jeton d'accès à l'API Graph (SSO + OBO) </h1>
+
+    <b>Jeton SSO : </b>
+    <div type="text" id="TeamsTokens"></div>
+    <p />
+    <b>Jeton d'accès : </b>
+    <div type="text" id="AccessToken"></div>
+    <p />
+    <b>Erreur : </b>
+    <div type="text" id="Error"></div>
+    <p />
+    <button onclick="GetServerSideToken()">Récupère le Jeton  d'accès (OBO)</button>
+
+    <button id="btnConsent" onclick="MSALLoginPopup()">Demander les consentements utilisateurs</button>
+
+
+    <!-- Microsoft Teams JavaScript API (via CDN) -->
+    <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
+    <script type="text/javascript" src="./authConfig.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnConsent").hide();
+            GetTeamsToken();
+        });
+        function GetTeamsToken() {
+
+            microsoftTeams.initialize();
+
+            microsoftTeams.authentication.getAuthToken({
+                successCallback: resultAccessToken => {
+                    $('#TeamsTokens').text(resultAccessToken);
+                },
+                failureCallback: reason => {
+                    $('#Error').text(reason);
+                }
+            });
+        }
+
+        function GetServerSideToken() {
+            $("#btnConsent").hide();
+            var teamsToken = $('#TeamsTokens').text();
+            // Il est possible qu'il faille demander des consentements admin par exemple.
+            // https://login.microsoftonline.com/common/adminconsent?client_id=<AAD_App_ID>
+            // ou alors si cela échoue .... il est alors possible d'utiliser MSAL.JS pour obtenir un jeton de manière silencieuse
+            
+            $.ajax({
+                url: window.location.origin.toLowerCase() + "/ServersideAuth/obotoken",
+                headers: {
+                    'Authorization': 'bearer ' + teamsToken
+                },
+                type: "get",
+                success: function (result, status) {
+                    $('#AccessToken').text(result);
+                    console.log(result);
+                },
+                error: function (result, status, error) {
+                    $('#Error').text(error + ":" + result.responseText);
+                    if (result.responseText == "invalid_grant") {
+                        $("#btnConsent").show();
+                    }
+                    
+                }
+
+            });
+        }
+        function MSALLoginPopup() {
+            microsoftTeams.getContext(function (context) {
+
+                var MSALApp = new msal.PublicClientApplication(msalConfig)
+                // Est-ce que l'utilisateur c'est déjà connecté ?
+                var currentAccount = MSALApp.getAccountByUsername(context.upn);
+
+                const silentRequest = {
+                    scopes: ["User.Read", "Mail.Read"],
+                    account: currentAccount,
+                    forceRefresh: false
+                };
+
+                const request = {
+                    scopes: ["User.Read", "Mail.Read"],
+                    loginHint: context.upn
+                };
+
+                // 1 on essai d'acquierir un Token de manière silencieuse
+                // 2 si jamais cela ne fonctionne pas on présente une popup à l'utilisateur
+
+                MSALApp.acquireTokenSilent(silentRequest).then(tokenResponse => {
+                    $('#AccessToken').text(tokenResponse.accessToken);
+                }).catch(async (error) => {
+                    $('#Error').text(error);
+                    if (context.hostClientType == "desktop") {
+                        msalConfig.redirectUri = "http://localhost:8080"
+                    }
+                    if (context.hostClientType == "web") {
+                        MSALApp.acquireTokenPopup(request).then(tokenResponse => {
+                            $('#Error').text("");
+                            $('#AccessToken').text(tokenResponse.accessToken);
+                        });
+                    }
+                    else {
+                        alert("pas encore supporté !! sur le desktop");
+                    }
+
+                }).catch(error => {
+                    $('#Error').text(error);
+                });
+
+            });
+
+        }
+    </script>
+</body>
+</html>

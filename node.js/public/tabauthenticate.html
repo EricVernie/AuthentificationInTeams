@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Démarre le flux d'authentification pour un onglet Teams</h1>
+
+
+    <b>Jeton d'accès : </b>
+    <div type="text" id="AccessToken"></div>
+    <p />
+    <b>Erreur : </b>
+    <p/>
+    <button onclick="Authenticate()">s'authentifier</button>
+
+
+    <!-- Microsoft Teams JavaScript API (via CDN) -->
+    <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Authenticate();
+        });
+
+        // Utilisation du SDK Teams pour l'authenfication
+        function Authenticate() {
+            microsoftTeams.initialize();
+            microsoftTeams.getContext((context) => {
+                microsoftTeams.authentication.authenticate({
+                    url: window.location.origin + "/tabauthenticationstart.html",
+                    width: 1024,
+                    height: 768,
+                    successCallback: function (result) {
+                        console.log(result);
+                        $('#AccessToken').text(result.access_token);
+                    },
+                    failureCallback: function (reason) {
+                        $('#Error').text("Login failed: " + reason);
+                    }
+                });
+            });
+            return true;
+        }
+    </script>
+
+
+
+</body>
+</html>

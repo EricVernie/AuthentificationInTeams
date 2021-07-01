@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+</head>
+<body>
+    <h1>Retour d'Azure Active Directory</h1>
+    <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./authConfig.js"></script>
+
+    <script type="text/javascript">
+
+        microsoftTeams.initialize()
+        var hashParams = getHashParameters();
+
+        let expectedState = localStorage.getItem("state");
+
+        microsoftTeams.getContext(function (context) {
+
+            if (hashParams["error"]) {
+                // Authentication/authorization failed
+                microsoftTeams.authentication.notifyFailure(hashParams["error"]);
+            }
+            // Le endpoint V2 utilise PKCE à la place
+            // https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-app-types#single-page-apps-javascript
+            // En fonction du response_type choisie (tabauthenticationstart.html)
+            else if (hashParams["code"]) {
+                if (expectedState !== hashParams["state"]) {
+                    // State does not match, report error
+                    microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");
+                } else {
+
+                    //debug
+                    //let result = JSON.stringify({
+                    //    state: expectedState,
+                    //    code: hashParams["code"],
+                    //    codeVerifier: localStorage.getItem("codeVerifier"),
+                    //    redirectUri: redirectUri,
+                    //});
+                    //microsoftTeams.authentication.notifySuccess(result);
+
+                    // Une fois le code reçu j'obtiens un Access Token
+                    $.ajax({
+                        url: "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+                        type: "post",
+                        data: "scope=https://graph.microsoft.com/.default"
+                            + "&client_id=" + msalConfig.auth.clientId
+                            + "&code=" + hashParams["code"]
+                            + "&grant_type=authorization_code"
+                            + "&code_verifier=" + localStorage.getItem("codeVerifier")
+                            + "&redirect_uri=" + location.protocol + "//" + location.host + location.pathname,
+                        contentType: "application/x-www-form-urlencoded",
+                        success: function (result, status) {
+                            microsoftTeams.authentication.notifySuccess(result);
+                        },
+                        headers: {
+                            /*    'content-type':"application/x-www-form-urlencoded",*/
+                            /*    'Access-Control-Allow-Origin': '*.demozonex.com'*/
+                        },
+                        error: function (result, status, error) {
+                            microsoftTeams.authentication.notifyFailure(error);
+                        }
+                    });
+                }
+
+            }
+            // Pour la v1 du endpoint AAD qui retourne un id_token et access_token (Flux implicite)
+            // Mais c'est moins sécure maintenant que PKCE,
+            // https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-app-types#single-page-apps-javascript
+
+            else if (hashParams["access_token"]) {
+
+                if (expectedState !== hashParams["state"]) {
+                    // State does not match, report error
+                    microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");
+                }
+                else {
+                    // Success: return token information to the tab
+                    var _idToken = hashParams["id_token"];
+                    var _accessToken = hashParams["access_token"];
+                    var _tokenType = hashParams["token_type"];
+                    var _expireIn = hashParams["expires_in"];
+                    microsoftTeams.authentication.notifySuccess(_accessToken);
+                }
+            }
+            else {
+                // Unexpected condition: hash does not contain error or access_token parameter
+                microsoftTeams.authentication.notifyFailure("UnexpectedFailure");
+            }
+        });
+        function getHashParameters() {
+            var hashParams = {};
+            location.hash.substr(1).split("&").forEach(function (item) {
+                var s = item.split("="), k = s[0], v = s[1] && decodeURIComponent(s[1]);
+                hashParams[k] = v;
+            });
+            return hashParams;
+        };
+    </script>
+
+
+</body>
+
+
+
+</html>

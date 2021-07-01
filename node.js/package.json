@@ -1,0 +1,15 @@
+{
+  "name": "oauthteamsnode",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@azure/msal-node": "^1.2.0",
+    "debug": "~2.6.9",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^2.0.3"
+  }
+}
