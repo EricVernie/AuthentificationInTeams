@@ -10,7 +10,7 @@
     <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="./authConfig.js"></script>
+    <script type="text/javascript" src="../scripts/authConfig.js"></script>
 
     <script type="text/javascript">
 
@@ -33,15 +33,6 @@
                     // State does not match, report error
                     microsoftTeams.authentication.notifyFailure("StateDoesNotMatch");
                 } else {
-
-                    //debug
-                    //let result = JSON.stringify({
-                    //    state: expectedState,
-                    //    code: hashParams["code"],
-                    //    codeVerifier: localStorage.getItem("codeVerifier"),
-                    //    redirectUri: redirectUri,
-                    //});
-                    //microsoftTeams.authentication.notifySuccess(result);
 
                     // Une fois le code reçu j'obtiens un Access Token
                     $.ajax({

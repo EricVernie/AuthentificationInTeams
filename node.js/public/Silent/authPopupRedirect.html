@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <p>
+        Authentification en cours
+    </p>
+
+    <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
+    <script type="text/javascript" src="../scripts/authConfig.js"></script>
+    <script type="text/javascript">
+        // Cette page est appelée lorsque 
+        
+
+        $(document).ready(function () {
+            microsoftTeams.initialize(window);
+            const msalPopupConfig = {
+                auth: {
+                    clientId: msalConfig.auth.clientId,
+                    authority: msalConfig.auth.authority,
+                    redirectUri: msalConfig.auth.redirectPopUri
+                },
+                cache: {
+                    cacheLocation: "sessionStorage", 
+                    storeAuthStateInCookie: false, 
+                }
+            };
+
+            const msalClient = new msal.PublicClientApplication(msalPopupConfig);
+
+            microsoftTeams.getContext((context) => {
+                msalClient.handleRedirectPromise().then((tokenResponse) => {
+                    if (tokenResponse) {
+                        microsoftTeams.authentication.notifySuccess(tokenResponse);
+                    }
+                }).catch((error) => {
+                    console.log(error);
+                    microsoftTeams.authentication.notifyFailure(error);
+                });
+                
+                msalClient.loginRedirect({
+                    scopes: ["User.Read", "Mail.Read"],
+                    loginHint: context.loginHint
+                });
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>

@@ -5,7 +5,13 @@
     <title></title>
 </head>
 <body>
-    <h1>Récupère le jeton client Teams et le transmet côté serveur pour obtenir un jeton d'accès à l'API Graph (SSO + OBO) </h1>
+    
+    <h1>
+        <a href="https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso"
+           target="_blank" title="Tutoriels auth">Authentification SSO</a>
+    </h1>
+
+    Récupère le jeton client Teams et le transmet côté serveur pour obtenir un jeton d'accès à l'API Graph (SSO + OBO) 
 
     <b>Jeton SSO : </b>
     <div type="text" id="TeamsTokens"></div>
@@ -13,34 +19,39 @@
     <b>Jeton d'accès : </b>
     <div type="text" id="AccessToken"></div>
     <p />
-    <b>Erreur : </b>
     <div type="text" id="Error"></div>
     <p />
-    <button onclick="GetServerSideToken()">Récupère le Jeton  d'accès (OBO)</button>
-
-    <button id="btnConsent" onclick="MSALLoginPopup()">Demander les consentements utilisateurs</button>
+    <button id="btnServerSideToken" onclick="GetServerSideToken()">Demande le Jeton  d'accès (OBO)</button>
+    <p />
+    <button id="btnConsent" onclick="MSALRequestConsent()">Consentements utilisateurs</button>
 
 
     <!-- Microsoft Teams JavaScript API (via CDN) -->
     <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
-    <script type="text/javascript" src="./authConfig.js"></script>
+    <script type="text/javascript" src="../scripts/authConfig.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#btnConsent").hide();
+            $("#btnServerSideToken").hide();
+
             GetTeamsToken();
         });
         function GetTeamsToken() {
 
-            microsoftTeams.initialize();
+            microsoftTeams.initialize(window);
 
             microsoftTeams.authentication.getAuthToken({
                 successCallback: resultAccessToken => {
                     $('#TeamsTokens').text(resultAccessToken);
+                    $("#btnServerSideToken").show();
                 },
                 failureCallback: reason => {
                     $('#Error').text(reason);
+                    if (error === 'renewalTimeout') {
+
+                    }
                 }
             });
         }
@@ -51,9 +62,9 @@
             // Il est possible qu'il faille demander des consentements admin par exemple.
             // https://login.microsoftonline.com/common/adminconsent?client_id=<AAD_App_ID>
             // ou alors si cela échoue .... il est alors possible d'utiliser MSAL.JS pour obtenir un jeton de manière silencieuse
-            
+
             $.ajax({
-                url: window.location.origin.toLowerCase() + "/ServersideAuth/obotoken",
+                url: window.location.origin.toLowerCase() + "/token",
                 headers: {
                     'Authorization': 'bearer ' + teamsToken
                 },
@@ -63,33 +74,39 @@
                     console.log(result);
                 },
                 error: function (result, status, error) {
-                    $('#Error').text(error + ":" + result.responseText);
-                    if (result.responseText == "invalid_grant") {
+                    let resultObject=JSON.parse(result.responseText);
+                    $('#Error').text(error + ":" + resultObject.errorCode);                    
+                    if (resultObject.errorCode  === "invalid_grant" || resultObject.errorCode  === "unauthorized_client") {
                         $("#btnConsent").show();
+                        $("#btnServerSideToken").hide();
+
                     }
-                    
+
                 }
 
             });
         }
-        function MSALLoginPopup() {
-            microsoftTeams.getContext(function (context) {
-                var MSALApp = new msal.PublicClientApplication(msalConfig)
-                const request = {
-                    scopes: ["User.Read", "Mail.Read"],
-                    loginHint: context.upn,
-                };
-                if (context.hostClientType == "web") {
-                    MSALApp.acquireTokenPopup(request).then(tokenResponse => {
-                        $('#Error').text("");
-                        $('#AccessToken').text(tokenResponse.accessToken);
-                    });
+        function MSALRequestConsent() {
+
+            // Redirige les consentements utilisateurs vers la page définie ici
+            microsoftTeams.authentication.authenticate({
+                url: window.location.origin + "/SSO/authPopupRedirect.html",
+                width: 1024,
+                height: 1024,
+                successCallback: (result) => {
+                    $('#AccessToken').text(result);
+                    $("#btnServerSideToken").show();
+                },
+                failureCallback: (reason) => {
+                    $('#Error').text(reason);
                 }
-                else {
-                   alert("pas encore supporté !! sur le desktop");
-                }
-            });                                
-        }                
+            });
+
+
+        }
+
+                // Ne fonctionne pas dans le Client teams Desktop
+
     </script>
 </body>
 </html>

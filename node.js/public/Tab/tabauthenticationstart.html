@@ -7,26 +7,24 @@
 <body>
     <!-- Microsoft Teams JavaScript API (via CDN) -->
     <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="./authConfig.js"></script>
-    
+    <script type="text/javascript" src="../scripts/authConfig.js"></script>
         <script type="text/javascript">
 
-            microsoftTeams.initialize()
+            microsoftTeams.initialize(window)
             microsoftTeams.getContext(async function (context) {
-                let state = _guid(); // "Etatquiseracomparex509"
+                let state = _guid(); 
                 localStorage.setItem("state", state);
-
                 var originalCode = _guid();
                 var codeChallenge = await pkceChallengeFromVerifier(originalCode);
                 localStorage.removeItem("codeVerifier");
                 localStorage.setItem("codeVerifier", originalCode);
 
                 var queryParams = {
-                client_id: msalConfig.auth.clientId,
+                    client_id: msalConfig.auth.clientId,
                     response_type: "code", 
                     response_mode: "fragment",
                     scope: [".default"],
-                    redirect_uri: window.location.origin.toLowerCase() + "/tabauthenticationend.html",
+                    redirect_uri: window.location.origin.toLowerCase() + "/tab/tabauthenticationend.html",
                     nonce: _guid(),
                     state: state,
                     login_hint: context.upn,

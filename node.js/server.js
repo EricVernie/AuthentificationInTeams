@@ -6,10 +6,9 @@ const jwksClient = require('jwks-rsa');
 
 const config = {
   auth: {
-      clientId: "[AAD CLIENT ID]",
-      authority: "https://login.microsoftonline.com/38afde78-8c0b-41f8-b6a7-1f145a83aa9f",
-       /* Attention ne jamais laisser de secret dans du code*/
-      clientSecret: "[SECRET]",
+      clientId: "[CLIENT ID]", //Le client ID de l'application enregistrée sur Azure Active Directory 
+      authority: "https://login.microsoftonline.com/[TENANT ID]", //Le Tenant ID de votre domaine Azure ACtive Directory
+      clientSecret: "[CLIENT SECRET]",
   }
 };
 
@@ -21,7 +20,6 @@ const app = express();
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-// Valide le jeton qui est passer dans l'entète Authorization
 const validateJwt = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (authHeader) {
@@ -45,6 +43,7 @@ const validateJwt = (req, res, next) => {
   }
 };
 
+
 const getSigningKeys = (header, callback) => {
   var client = jwksClient({
       jwksUri: 'https://login.microsoftonline.com/common/discovery/keys'
@@ -55,23 +54,16 @@ const getSigningKeys = (header, callback) => {
       callback(null, signingKey);
   });
 }
-//middleware
-// app.use((req, res, next) => {
-
-//   console.log("Validation du jeton");
-//   ValidateTheToken(req,res,next);
-// })
 
 app.use(express.static('public'));
 
 app.get('/', (req, res) => res.send('Bonjour et Bienvenue v0.0.2!'));
 
 // 
-app.get('/obotoken',validateJwt, (req,res) => {
+app.get('/token',validateJwt, (req,res) => {
   const authHeader = req.headers.authorization;
 
   const oboRequest = {
-      // Recupère le jeton
       oboAssertion: authHeader.split(' ')[1],
       scopes: [".default"],
   }
@@ -79,7 +71,7 @@ app.get('/obotoken',validateJwt, (req,res) => {
   cca.acquireTokenOnBehalfOf(oboRequest).then((response) => {
       console.log(response);
       res.send(response.accessToken);      
-  }).catch((error) => {      
+  }).catch((error) => {
       res.status(401).send(error);
   });
 

@@ -1,14 +1,14 @@
 {
   "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
   "manifestVersion": "1.9",
-  "version": "1.0.0",
-  "id": "[TEAMS APP ID]",
+  "version": "1.0.2",
+  "id": "A24E236F-DBB9-402D-A598-5D4229E24173",
   "packageName": "com.teams.ev.fdd",
   "developer": {
-    "name": "auteur",
-    "websiteUrl": "https://xxx.xxxx.com",
-    "privacyUrl": "https://xxx.xxxx.com/privacy",
-    "termsOfUseUrl": "https://xxx.xxxx.com/termsofuse"
+    "name": "Eric Vernie",
+    "websiteUrl": "https://auth.demozonex.com",
+    "privacyUrl": "https://auth.demozonex.com/privacy",
+    "termsOfUseUrl": "https://auth.demozonex.com/termsofuse"
   },
   "icons": {
     "color": "bot-icon-192x192.png",
@@ -27,8 +27,8 @@
     {
       "entityId": "tabsso",
       "name": "SSO",
-      "contentUrl": "https://xxx.xxxx.com/sso.html",
-      "websiteUrl": "https://xxx.xxxx.com",
+      "contentUrl": "https://auth.demozonex.com/SSO/sso.html",
+      "websiteUrl": "https://auth.demozonex.com",
       "scopes": [
         "personal"
       ]
@@ -36,17 +36,17 @@
     {
       "entityId": "tabsilent",
       "name": "Silent",
-      "contentUrl": "https://xxx.xxxx.com/tabsilentauthenticationstart.html",
-      "websiteUrl": "https://xxx.xxxx.com",
+      "contentUrl": "https://auth.demozonex.com/Silent/tabsilentauthenticationstart.html",
+      "websiteUrl": "https://auth.demozonex.com",
       "scopes": [
         "personal"
       ]
     },
     {
       "entityId": "tabauthentication",
-      "name": "Authentication",
-      "contentUrl": "https://xxx.xxxx.com/tabauthenticate.html",
-      "websiteUrl": "https://xxx.xxxx.com",
+      "name": "Authentification ",
+      "contentUrl": "https://auth.demozonex.com/Tab/tabauthenticate.html",
+      "websiteUrl": "https://auth.demozonex.com",
       "scopes": [
         "personal"
       ]
@@ -57,10 +57,10 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.xxxx.com"
+    "*.demozonex.com"
   ],
   "webApplicationInfo": {
-    "id": "[AAD CLIENT ID]",
-    "resource": "api://xxx.xxxx.com/[AAD CLIENT ID]"
+    "id": "24846ea4-fd42-4e7a-b17f-3d296f3b1fe6",
+    "resource": "api://auth.demozonex.com/24846ea4-fd42-4e7a-b17f-3d296f3b1fe6"
   }
 }

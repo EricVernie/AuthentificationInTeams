@@ -3,9 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>aspnet-AuhtInTeams-2E9E5CCD-8B03-4A27-B884-EC63C08293BB</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/9a96981c-4056-48b7-9301-7c2757548bcf/resourceGroups/training-teams-rg/providers/microsoft.insights/components/TabTeamsApi</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.7" />
     <PackageReference Include="Microsoft.Identity.Web" Version="1.1.0" />
@@ -13,25 +15,31 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\authConfig.js">
+    <Content Update="wwwroot\scripts\authConfig.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\SSO.html">
+    <Content Update="wwwroot\Silent\authPopupRedirect.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\tabauthenticate.html">
+    <Content Update="wwwroot\SSO\authPopupRedirect.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\tabsilentauthenticationstart.html">
+    <Content Update="wwwroot\SSO\SSO.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\tabsilentauthenticationend.html">
+    <Content Update="wwwroot\Tab\tabauthenticate.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\tabauthenticationend.html">
+    <Content Update="wwwroot\Silent\tabsilentauthenticationstart.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Update="wwwroot\tabauthenticationstart.html">
+    <Content Update="wwwroot\Silent\tabsilentauthenticationend.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Tab\tabauthenticationend.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Tab\tabauthenticationstart.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
