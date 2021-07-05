@@ -45,7 +45,8 @@ Vous noterez ici que nous utilisons le [SDK Client Teams](https://docs.microsoft
 
 2. La page **_tab/tabauthenticationstart.html_** est invoquée par le client Teams, c'est elle qui va présenter la
 page de consentements
-![consent](https://github.com/EricVernie/CloudNativeAppForAzureDev/blob/main/images/TabConsentement.png)
+
+![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabConsentement.png)
 
 ```JS
 microsoftTeams.initialize(window)
