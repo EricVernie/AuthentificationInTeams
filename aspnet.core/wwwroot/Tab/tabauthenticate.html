@@ -25,7 +25,7 @@
             Authenticate();
         });
 
-        // Utilisation du SDK Teams pour l'authenfication
+        // Utilisation du SDK Teams pour l'authentification
         function Authenticate() {
             microsoftTeams.initialize();
             microsoftTeams.getContext((context) => {
@@ -41,8 +41,7 @@
                         $('#Error').text("Login failed: " + reason);
                     }
                 });
-            });
-            return true;
+            });            
         }
     </script>
 
