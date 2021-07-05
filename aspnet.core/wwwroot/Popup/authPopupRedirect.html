@@ -7,7 +7,7 @@
 <body>
 
     <p>
-        Authentification en cours
+        Demande de consentements...
     </p>
 
     <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
@@ -15,8 +15,9 @@
     <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
     <script type="text/javascript" src="../scripts/authConfig.js"></script>
     <script type="text/javascript">
-        // Cette page est appelée lorsque 
-        
+        // Cette page est appelée lorsqu'une demande de consentements est requise
+        // Si par exemple, lors de l'obtention d'un jeton via le flux 'on-behalh-of'
+        // une erreur invalid_grant est retournée
 
         $(document).ready(function () {
             microsoftTeams.initialize(window);
@@ -24,7 +25,7 @@
                 auth: {
                     clientId: msalConfig.auth.clientId,
                     authority: msalConfig.auth.authority,
-                    redirectUri: msalConfig.auth.redirectPopUri
+                    redirectUri: window.location.origin + "/Popup/authPopupRedirect.html"
                 },
                 cache: {
                     cacheLocation: "sessionStorage", 

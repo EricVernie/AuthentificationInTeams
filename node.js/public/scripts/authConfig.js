@@ -2,10 +2,9 @@
 // https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser
 const msalConfig = {
     auth: {
-        clientId: "[CLIENT ID]", //Le client ID de l'application enregistrée sur Azure Active Directory 
+	clientId: "[CLIENT ID]", //Le client ID de l'application enregistrée sur Azure Active Directory  
         authority: "https://login.microsoftonline.com/common", 
-        redirectUri: window.location.origin + "/silent/tabsilentauthenticationend.html",
-        redirectPopUri: window.location.origin + "/SSO/authPopupRedirect.html"
+        redirectUri: window.location.origin + "/Silent/tabsilentauthenticationend.html"        
     },
     cache: {
         cacheLocation: "localStorage", 

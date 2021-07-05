@@ -12,7 +12,7 @@
     </h1>
 
     Récupère le jeton client Teams et le transmet côté serveur pour obtenir un jeton d'accès à l'API Graph (SSO + OBO) 
-
+    <p />
     <b>Jeton SSO : </b>
     <div type="text" id="TeamsTokens"></div>
     <p />
@@ -90,7 +90,7 @@
 
             // Redirige les consentements utilisateurs vers la page définie ici
             microsoftTeams.authentication.authenticate({
-                url: window.location.origin + "/SSO/authPopupRedirect.html",
+                url: window.location.origin + "/Popup/authPopupRedirect.html",
                 width: 1024,
                 height: 1024,
                 successCallback: (result) => {
@@ -104,8 +104,6 @@
 
 
         }
-
-                // Ne fonctionne pas dans le Client teams Desktop
 
     </script>
 </body>

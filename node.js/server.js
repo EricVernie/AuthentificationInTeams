@@ -59,7 +59,7 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => res.send('Bonjour et Bienvenue v0.0.2!'));
 
-// 
+
 app.get('/token',validateJwt, (req,res) => {
   const authHeader = req.headers.authorization;
 

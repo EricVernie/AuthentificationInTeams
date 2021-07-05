@@ -17,7 +17,7 @@
     <p />
     <div type="text" id="Error"></div>
     <p />
-    <button id="btnLogin" onclick="MSALLoginPopup()">S'authentifier</button>
+    <button id="btnLogin" onclick="MSALPopupRedirect()">S'authentifier (Desktop)</button>
     <p />
     <button id="btnClearCache" onclick="clearCache()">Déconnexion</button>
     <p />
@@ -31,7 +31,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             MSALLoginPopup();
-            $("#btnLogin").hide();
+            //$("#btnLogin").hide();
             $("btnClearCache").hide();
         });
 
@@ -70,7 +70,7 @@
                         }
                         else {
                             //acquireTokenPopup ne fonctionne pas dans le client Desktop
-                            MSALPopupRedirect();
+                            MSALPopupRedirect(MSALApp);
                         }
                     }).catch(error => {
                         $('#Error').text(error);
@@ -78,16 +78,20 @@
 
             });
         }
-        function MSALPopupRedirect() {
+        function MSALPopupRedirect(msalapp) {
 
             // Redirige les consentements utilisateurs vers la page définie ici
             microsoftTeams.authentication.authenticate({
-                url: window.location.origin + "/Silent/authPopupRedirect.html",
+                url: window.location.origin + "/Popup/authPopupRedirect.html",
                 width: 1024,
                 height: 1024,
                 successCallback: (result) => {
-                    $('#AccessToken').text(result);
-                    $("#btnServerSideToken").show();
+                    $('#Error').text("");
+                    $('#AccessToken').text(result.accessToken);
+                    //msalapp.setActiveAccount(result.account);
+                    //console.log(result.account);
+                        
+                    
                 },
                 failureCallback: (reason) => {
                     $('#Error').text(reason);
@@ -103,7 +107,7 @@
                 var currentAccount = MSALApp.getAccountByUsername(context.upn);
                 await MSALApp.logoutPopup({
                     account: currentAccount,
-                    postLogoutRedirectUri: window.location.origin + "/silent/tabsilentauthenticationend.html"
+                    postLogoutRedirectUri: msalConfig.auth.redirectUri
                 });
             });
 
