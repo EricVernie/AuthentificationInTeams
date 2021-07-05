@@ -12,7 +12,7 @@ Il existe 3 manières d'authentifier dans son application Microsoft Teams les ut
 •	[L'authentification SSO ](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)
 
 
-L'authentification de l'utilisateur n'est qu'une étape, ce qui nous interesse c'est de récupèrer un Jeton d'accès de type JWT, afin de pouvoir accèder à des ressources, des APIs protégées par Azure Active Dictory.
+L'authentification de l'utilisateur n'est qu'une étape, ce qui nous interesse c'est de récupèrer un Jeton d'accès de type JWT, afin de pouvoir accèder à des ressources, des APIs protégées par Azure Active Directory.
 
 Par exemple, pouvoir accèder à l'API [Microsoft Graph](https://docs.microsoft.com/fr-fr/graph/api/overview?view=graph-rest-1.0), afin d'avoir accès aux ressources de l'utilisteur authentifié, comme ses messages, ses fichiers, ses calendriers, ou toutes autres ressources exposées.
 
@@ -47,6 +47,10 @@ Vous noterez ici que nous utilisons le [SDK Client Teams](https://docs.microsoft
 page de consentements
 
 ![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabConsentement.png)
+
+>Note : Si vous êtes sur le client Teams de Bureau ou Mobile, Il est possible que la toute 1ere fois, vous ayez une page qui vous demande de vous authentifier.
+
+![Credential](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabCredentiels.png)
 
 ```JS
 microsoftTeams.initialize(window)
