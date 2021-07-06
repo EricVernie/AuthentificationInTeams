@@ -34,6 +34,6 @@ Vous trouverez donc dans ce repos le code des trois manières de faire sous leur
 
 [Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
 
-[L'authentification en mode silencieux]
+[L'authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
 
-[L'authentification en mode silencieux]
+[L'authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)
