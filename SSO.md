@@ -1,6 +1,6 @@
 # [L'authentification SSO](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)
 
-Le single Sign-on (SSO) ou authentification unique en Français permet à l’utilisateur de se connecter une seule fois et d’accéder aux services sans être obligé de ré-entrer ces informations d'identification.
+Le single Sign-On (SSO) ou authentification unique en Français, permet à l’utilisateur de se connecter une seule fois et d’accéder aux services sans être obligé de ré-entrer ces informations d'identification.
 
 Accéder aux services dans notre cas serait de récupèrer un jeton oauth2 d'accès, pour exécuter une requête sur [l'API Microsoft Graph](https://docs.microsoft.com/fr-fr/graph/api/overview?view=graph-rest-1.0)
 
@@ -74,14 +74,14 @@ La configuration pour Azure Active Directory se trouve dans le fichier appsettin
 | Paramètres| Description |
 | ------------- |:-------------|
 | Domain | Nom du domain Azure Active Directory |
-| Audience | Dans notre exemple le client ID de l'application enregistrée sur Azure Active Directory |
+| Audience | Dans notre exemple le client Id de l'application enregistrée sur Azure Active Directory |
 | TenantId | Le tenand Id Azure Active Directory |
-| ClientId | Le client ID de l'application enregistrée sur Azure Active Directory |
+| ClientId | Le client Id de l'application enregistrée sur Azure Active Directory |
 | ClientSecret** | Le secret de l'application enregistrée sur Azure Active Directory |
 
->** Il ne faut **JAMAIS** laisser de secret dans son application. Mais pour des raisons de simplicité ici je l'accepte. Néanmoins il est préférable d'utiliser des artifices comme des coffres forts, style Azure Keyvault.
+>** Il ne faut **JAMAIS** laisser de secret dans son application. Mais pour des raisons de simplicité ici je l'accepte. Néanmoins il est préférable d'utiliser des services externes pour protéger les secrets, comme des coffres forts, style Azure Keyvault.
 
-La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le service **_ITokenAcquisition_** qu'il sera possible d'utiliser dans le controller **_authController.cs_**, afin d'obtenir à partir du controller, un jeton d'accès avec le flux on-behalf-of.
+La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le service **_ITokenAcquisition_** qu'il sera possible d'utiliser dans le controller **_authController.cs_**, afin d'obtenir un jeton d'accès avec le flux on-behalf-of.
 
 
 ## authController.cs
@@ -227,7 +227,7 @@ Néanmoins la 1ere fois que l'application est utilisée par l'utilisateur de Mic
 
 Le code d'erreur **invalid_grant** signifie que l'utilisateur doit consentir des droits à l'application.
 
-Dans ce cas la nous allons déclencher la méthode **_MSALRequestConsent()_**
+Dans ce cas là nous allons déclencher la méthode **_MSALRequestConsent()_**
 
 ```JS
 function MSALRequestConsent() {            
@@ -247,8 +247,6 @@ function MSALRequestConsent() {
 ```
 
 La méthode **_microsoftTeams.authentication.authenticate()_** va permettre de charger la page **_authPopupRedirect.html_** dans une **Popup**.
-
-En fonction de la réussite ou de l'échec de l'authentification, on affiche le jeton ou l'erreur.
 
 ## authPopupRedirect.html
 
@@ -289,7 +287,7 @@ Lorsque la page **_authPopupRedirect_** se charge elle exécute le code suivant 
 
 C'est la méthode **_msaClient.LoginRedirect()_** qui affichera la page d'authentification et de consentement à l'utilisateur comme illustré sur l'image suivante : 
 
-![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOConsentement.png)
+![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOConsentements.png)
 
 >Note : Avec les clients Teams de Bureau ou Mobile, Il est possible que vous ayez une page qui vous demande de vous authentifier.
 
