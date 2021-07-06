@@ -77,7 +77,8 @@ Cette authentification ce fait selon les étapes suivantes :
     ```
     >Note: Vous retrouverez les méthodes _guid() et pkceChallengeFromVerifier() dans le code de la page.
 
-    Ensuite nous allons sauvegarder le code original pour une utilisation future
+    Ensuite nous allons sauvegarder le code original que nous utiliserons à l'étape 3.
+
     ```JS    
     localStorage.setItem("codeVerifier", originalCode);
     ```
@@ -113,6 +114,7 @@ Cette authentification ce fait selon les étapes suivantes :
     Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(result)_** est invoquée et renvoie le résultat à la page **_/tab/tabauthenticate.html_** qui sera traité par la méthode **_successCallback_**
 
     ## tabauthenticationend.html
+    
     ```JS
     microsoftTeams.initialize()
     var hashParams = getHashParameters();        
