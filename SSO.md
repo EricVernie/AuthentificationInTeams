@@ -23,7 +23,7 @@ function GetTeamsToken() {
 
 Ce jeton pourrait faire l'affaire si vous le passiez à votre propre API qui pourrait le valider et autoriser l'accès.
 
-Néanmoins, ce jeton n'est porteur que de peut d'autorisations (email, profile, offline_access and OpenId), ce qui n'est pas suffisant lorsqu'on souhaite accéder à d'autres ressources proposées par l'API Graph.
+Néanmoins, il n'est porteur que de peut d'autorisations (email, profile, offline_access and OpenId), ce qui n'est pas suffisant lorsqu'on souhaite accéder à d'autres ressources proposées par l'API Graph par exemple.
 
 On va donc utiliser le flux d'autorisation [on-behalf-of](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow), afin d'obtenir; au nom de l'utilisateur authentifié sur Microsoft Teams; un jeton d'accès porteur de plus d'autorisations.
 
@@ -79,7 +79,7 @@ La configuration pour Azure Active Directory se trouve dans le fichier appsettin
 | ClientId | Le client ID de l'application enregistrée sur Azure Active Directory |
 | ClientSecret** | Le secret de l'application enregistrée sur Azure Active Directory |
 
->** Il ne faut JAMAIS mettre en dur de secret dans son application. Mais pour des raisons de simplicité ici je l'accepte. Néanmoins il est préférable d'utiliser des artifices comme des coffres forts, style Azure Keyvault.
+>** Il ne faut **JAMAIS** laisser de secret dans son application. Mais pour des raisons de simplicité ici je l'accepte. Néanmoins il est préférable d'utiliser des artifices comme des coffres forts, style Azure Keyvault.
 
 La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le service **_ITokenAcquisition_** qu'il sera possible d'utiliser dans le controller **_authController.cs_**, afin d'obtenir à partir du controller, un jeton d'accès avec le flux on-behalf-of.
 
@@ -118,6 +118,8 @@ La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le ser
 On injecte dans le constructeur le service **_ITokenAcquisition_** qui expose la méthode **_.GetAccessTokenForUserAsync()_** afin d'obtenir le jeton d'accès que l'on retourne à l'appellant.
 
 Pour node.js, nous utiliserons des librairies [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) et [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) pour la validation du jeton.
+
+## service.js
 
 ```JS
 const validateJwt = (req, res, next) => {
@@ -186,9 +188,11 @@ const config = {
 };
 ```
 
->Encore une fois le secret ne doit JAMAIS être codé en dur dans le code !!!
+>Encore une fois le secret ne doit **JAMAIS** être codé en dur dans le code !!!
 
 Une fois l'API Backend mis en place, il faut l'appeler en lui passant dans son entête **_authorization_**" le jeton obtenu par la méthode **_microsoftTeams.authentication.getAuthToken()_**
+
+## SSO.html
 
 ```JS
 function GetServerSideToken() {
@@ -242,9 +246,11 @@ function MSALRequestConsent() {
 }
 ```
 
-La méthode **_microsoftTeams.authentication.authenticate()_** va permettre de charger la page **_authPopupRedirect_.html_** dans une **Popup**.
+La méthode **_microsoftTeams.authentication.authenticate()_** va permettre de charger la page **_authPopupRedirect.html_** dans une **Popup**.
 
 En fonction de la réussite ou de l'échec de l'authentification, on affiche le jeton ou l'erreur.
+
+## authPopupRedirect.html
 
 Lorsque la page **_authPopupRedirect_** se charge elle exécute le code suivant :
 
@@ -285,16 +291,15 @@ C'est la méthode **_msaClient.LoginRedirect()_** qui affichera la page d'authen
 
 ![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOConsentement.png)
 
->Note : Si vous êtes sur le client Teams de Bureau ou Mobile, Il est possible que vous ayez une page qui vous demande de vous authentifier.
+>Note : Avec les clients Teams de Bureau ou Mobile, Il est possible que vous ayez une page qui vous demande de vous authentifier.
 
 ![Credential](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOCredentiels.png)
 
 Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/SSO/SSO.html_** traitée par la méthode **_failureCallback_**
 
- Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(tokenResponse)_** est invoquée et renvoie le résultat à la page **_//SSO/SSO.html_** traité par la méthode **_successCallback_**
+ Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(tokenResponse)_** est invoquée et renvoie le résultat à la page **_/SSO/SSO.html_** traité par la méthode **_successCallback_**
 
  Enfin, vous devriez obtenir une page comme illustré sur la figure suivante : 
 
 ![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOToken.png)
 
- Il est possible de décoder le Jeton avec le site jwt.ms
