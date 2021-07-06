@@ -306,3 +306,20 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 [Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
 
 [L'authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
+
+
+## Avant de pouvoir utiliser cette exemple.
+1. Clone the repos
+
+2. Enregistrez l'application dans Azure Active Directory.
+
+    Pour obtenir la procédure détaillée à suivre, consultez [Inscription approfondie de votre application via le portail Azure](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#registering-your-app-through-the-azure-active-directory-portal-in-depth)
+
+3. Mettez à jour :
+
+    * Pour .NET la section **AzureAD** dans le fichier **appsettings.json** avec les informations obtenues lors de l'enregistrement de l'application.
+
+    * Pour node.js la section **const config** du fichier server.js
+
+    * Enfin pour les 
+
