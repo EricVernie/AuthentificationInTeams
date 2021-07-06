@@ -32,7 +32,7 @@ Middleware node.js
 Vous trouverez donc dans ce repos le code des trois manières de faire sous leur arborescence respective et pour des raisons de simplicité et de compréhension le code est inclus directement dans des pages html (que les pros du javascript ne m'en veuillent pas trop).
 
 
-[Le flux d'authentification dans les onglets]
+[Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
 
 [L'authentification en mode silencieux]
 
