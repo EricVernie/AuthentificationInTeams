@@ -301,3 +301,8 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
 ![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOToken.png)
 
+## Autres méthodes d'authentification
+
+[Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
+
+[L'authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)

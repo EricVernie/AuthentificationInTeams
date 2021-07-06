@@ -4,6 +4,8 @@ Pour cette méthode d'authentification, nous allons essentiellement utiliser la 
 
 Lorsque la page **_/Silent/tabsilentauthenticationstart.html_** se charge elle déclenche la méthode **_MSALLoginPopup()_**
 
+## tabsilentauthenticationstart.html
+
 ```JS
 function MSALLoginPopup() {
     microsoftTeams.initialize(window);
@@ -61,7 +63,7 @@ cache: {
 |**_authority_**|Point d'entré Azure Active Directory|
 |**_redirectUri_**|Url qui sera rappelée par Azure Active Directory. Il est important que lors de l'enregistrement de l'application sur Azure Active Directory de bien la mentionner. Pour l'inscription d'une application sur Azure Active Directory se référrer à l'article [Inscription d'une application SPA](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/scenario-spa-app-registration#redirect-uri-msaljs-20-with-auth-code-flow) |
 
-Si l'utilisateur c'est déjà connecté on récupère son compte pour l'utiliser dans la demande silencieuse de Jeton
+Si l'utilisateur c'est déjà connecté on récupère son compte pour l'utiliser dans la demande silencieuse du Jeton
 
 ```JS
     var currentAccount = MSALApp.getAccountByUsername(context.upn)S
@@ -85,13 +87,13 @@ C'est alors que l'on demande à l'utilisateur de s'authentifier et d'approuver l
 
 ![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentConsentement.png)
 
->Notes : Cette page de consentement, ne sera affichée qu'une seule fois. D'autre part, si vous êtes sur le client Teams de Bureau ou Mobile, Il est possible que la toute 1ere fois, vous ayez une page qui vous demande de vous authentifier.
+>Notes : Cette page de consentement, ne sera affichée qu'une seule fois. D'autre part, avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
 
 ![Credential](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentCredentiels.png)
 
 Vous aurez noté, qu'il est possible de récupèrer le context Microsoft Teams dans lequel tourne l'application. **_microsoftTeams.getContext(function (context)_**.
 
-L'objet context expose la propriété **_.hostClientType_** qui sera alors possible de tester pour savoir si le client Teams est l'application web ou tout autre client. 
+L'objet context expose la propriété **_.hostClientType_** qui sera alors possible de tester pour savoir si l'application tourne dans la version Web du client Teams ou tout autre client. 
 
 Comme la méthode **_acquiereTokenPopup()_** ne fonctionne pas "encore" sur les clients Teams de bureau et mobile, nous invoquons une autre méthode **_MSALPopupRedirect()_** pour l'authentification.
 
@@ -112,10 +114,13 @@ function MSALPopupRedirect(msalapp) {
         });
 }
 ```
-La méthode **_microsoftTeams.authentication.authenticate()_** va permettre de charger la page **_authPopupRedirect_.html_** dans une **Popup**.
+
+La méthode **_microsoftTeams.authentication.authenticate()_** va permettre de charger la page **_authPopupRedirect.html_** dans une **Popup**.
 
 En fonction de la réussite ou de l'échec de l'authentification, on affiche le jeton ou l'erreur.
 Lorsque la page **_authPopupRedirect_** se charge elle exécute le code suivant :
+
+## authPopupRedirect.html
 
 ```JS
  $(document).ready(function () {
@@ -162,4 +167,8 @@ Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illus
 
 ![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentToken.png)
 
-Il est possible de décoder le Jeton avec le site jwt.ms
+## Autres méthodes d'authentification
+
+[Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
+
+[L'authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)

@@ -114,7 +114,7 @@ Cette authentification ce fait selon les étapes suivantes :
     Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(result)_** est invoquée et renvoie le résultat à la page **_/tab/tabauthenticate.html_** qui sera traité par la méthode **_successCallback_**
 
     ## tabauthenticationend.html
-    
+
     ```JS
     microsoftTeams.initialize()
     var hashParams = getHashParameters();        
@@ -157,5 +157,11 @@ Cette authentification ce fait selon les étapes suivantes :
     ![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabToken.png)
 
     Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
+
+## Autres méthodes d'authentification
+
+[L'authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
+
+[L'authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)
 
     
