@@ -1,6 +1,6 @@
 # [L'authentification SSO](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)
 
-Le SSO ou authentification unique en Français permet à l’utilisateur de se connecter une seule fois et d’accéder aux services sans être obligé de ré-entrer ces informations d'identification.
+Le single Sign-on (SSO) ou authentification unique en Français permet à l’utilisateur de se connecter une seule fois et d’accéder aux services sans être obligé de ré-entrer ces informations d'identification.
 
 Accéder aux services dans notre cas serait de récupèrer un jeton oauth2 d'accès, pour exécuter une requête sur [l'API Microsoft Graph](https://docs.microsoft.com/fr-fr/graph/api/overview?view=graph-rest-1.0)
 
