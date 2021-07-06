@@ -48,10 +48,7 @@
                     $("#btnServerSideToken").show();
                 },
                 failureCallback: reason => {
-                    $('#Error').text(reason);
-                    if (error === 'renewalTimeout') {
-
-                    }
+                    $('#Error').text(reason);                   
                 }
             });
         }

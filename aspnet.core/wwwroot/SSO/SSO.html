@@ -35,7 +35,6 @@
         $(document).ready(function () {
             $("#btnConsent").hide();
             $("#btnServerSideToken").hide();
-
             GetTeamsToken();
         });
         function GetTeamsToken() {
@@ -48,10 +47,7 @@
                     $("#btnServerSideToken").show();
                 },
                 failureCallback: reason => {
-                    $('#Error').text(reason);
-                    if (error === 'renewalTimeout') {
-
-                    }
+                    $('#Error').text(reason);                    
                 }
             });
         }
