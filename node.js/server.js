@@ -62,12 +62,10 @@ app.get('/', (req, res) => res.send('Bonjour et Bienvenue v0.0.2!'));
 
 app.get('/token',validateJwt, (req,res) => {
   const authHeader = req.headers.authorization;
-
   const oboRequest = {
       oboAssertion: authHeader.split(' ')[1],
       scopes: [".default"],
   }
-
   cca.acquireTokenOnBehalfOf(oboRequest).then((response) => {
       console.log(response);
       res.send(response.accessToken);      

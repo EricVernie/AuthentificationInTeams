@@ -30,8 +30,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            MSALLoginPopup();
-            //$("#btnLogin").hide();
+            MSALLoginPopup();            
             $("btnClearCache").hide();
         });
 
@@ -91,15 +90,13 @@
                     //msalapp.setActiveAccount(result.account);
                     //console.log(result.account);
 
-
                 },
                 failureCallback: (reason) => {
                     $('#Error').text(reason);
                 }
             });
-
-
         }
+        
         function clearCache() {
             microsoftTeams.getContext(async function (context) {
 

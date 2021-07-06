@@ -32,9 +32,7 @@
                     storeAuthStateInCookie: false, 
                 }
             };
-
             const msalClient = new msal.PublicClientApplication(msalPopupConfig);
-
             microsoftTeams.getContext((context) => {
                 msalClient.handleRedirectPromise().then((tokenResponse) => {
                     if (tokenResponse) {

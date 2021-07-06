@@ -59,7 +59,6 @@
             // Il est possible qu'il faille demander des consentements admin par exemple.
             // https://login.microsoftonline.com/common/adminconsent?client_id=<AAD_App_ID>
             // ou alors si cela échoue .... il est alors possible d'utiliser MSAL.JS pour obtenir un jeton de manière silencieuse
-
             $.ajax({
                 url: window.location.origin.toLowerCase() + "/token",
                 headers: {
