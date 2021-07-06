@@ -23,7 +23,7 @@
                     client_id: msalConfig.auth.clientId,
                     response_type: "code", 
                     response_mode: "fragment",
-                    scope: [".default"],
+                    scope: ["User.Read", "Mail.Read"],
                     redirect_uri: window.location.origin.toLowerCase() + "/Tab/tabauthenticationend.html",
                     nonce: _guid(),
                     state: state,
