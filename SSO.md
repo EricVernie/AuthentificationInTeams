@@ -289,7 +289,7 @@ C'est la méthode **_msaClient.LoginRedirect()_** qui affichera la page d'authen
 
 ![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOConsentements.png)
 
->Note : Avec les clients Teams de Bureau ou Mobile, Il est possible que vous ayez une page qui vous demande de vous authentifier.
+>Note : Avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
 
 ![Credential](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOCredentiels.png)
 

@@ -4,7 +4,7 @@ Cette authentification ce fait selon les étapes suivantes :
 
 
 1. Lorsque la page **_/tab/tabauthenticate.html_** se charge, elle déclenche la méthode **_Authenticate()_**
-
+    ## tabauthenticate.html
     ```JS
     function Authenticate() {
     microsoftTeams.initialize();
@@ -28,14 +28,15 @@ Cette authentification ce fait selon les étapes suivantes :
 
     En fonction de la réussite ou de l'échec de l'authentification, on affiche le jeton ou l'erreur.
 
-2. La page **_tab/tabauthenticationstart.html_** est invoquée par le client Teams, c'est elle qui va présenter la
-page de consentements. 
+2. La page **_tab/tabauthenticationstart.html_** est invoquée par le client Teams, c'est elle qui va présenter la page de consentements. 
 
     ![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabConsentement.png)
 
-    >Notes : Cette page de consentement, ne sera affichée qu'une seule fois. D'autre part, si vous êtes sur le client Teams de Bureau ou Mobile, Il est possible que la toute 1ere fois, vous ayez une page qui vous demande de vous authentifier.
+    >Notes : Cette page de consentements, ne sera affichée qu'une seule fois. D'autre part, avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
 
     ![Credential](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabCredentiels.png)
+
+    ## tabauthenticationstart.html
 
     ```JS
     microsoftTeams.initialize(window)
@@ -100,7 +101,7 @@ page de consentements.
 
     Si l'authentification réussie, on va utiliser ce code de retour afin d'obtenir un jeton d'accès.
 
-    Pour obtenir ce jeton on utilise le point d'entrée https://login.microsoftonline.com/common/oauth2/v2.0/token en lui spécifiantles paramètres suivants : 
+    Pour obtenir ce jeton on utilise le point d'entrée https://login.microsoftonline.com/common/oauth2/v2.0/token en lui spécifiant les paramètres suivants : 
 
     | Paramètres| Description |
     | ------------- |:-------------|
@@ -111,7 +112,7 @@ page de consentements.
 
     Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(result)_** est invoquée et renvoie le résultat à la page **_/tab/tabauthenticate.html_** qui sera traité par la méthode **_successCallback_**
 
-
+    ## tabauthenticationend.html
     ```JS
     microsoftTeams.initialize()
     var hashParams = getHashParameters();        
@@ -155,4 +156,4 @@ page de consentements.
 
     Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
 
-    Il est possible de décoder le Jeton avec le site jwt.ms
+    
