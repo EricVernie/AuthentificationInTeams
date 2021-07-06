@@ -96,7 +96,7 @@ page de consentements.
 
 3. Une fois authentifié, Azure Active Directory renvoi le code via la page **_/tab/tabauthenticationend.html?#code=XXXXXXX_**
     
-    Si une erreur est survenue, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/tab/tabauthenticate.html_** qui sera traitée par la méthode **_failureCallback_**
+    Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/tab/tabauthenticate.html_** qui sera traitée par la méthode **_failureCallback_**
 
     Si l'authentification réussie, on va utiliser ce code de retour afin d'obtenir un jeton d'accès.
 
@@ -149,3 +149,10 @@ page de consentements.
         }
     ```
 
+    Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante : 
+
+    ![Token]((https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabToken.png))
+
+    Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
+
+    Il est possible de décoder le Jeton avec le site jwt.ms

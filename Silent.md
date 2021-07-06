@@ -2,7 +2,7 @@
 
 Pour cette méthode d'authentification, nous allons essentiellement utiliser la librairie [MSAL.js v2 pour navigateur](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser)
 
-Lorsque la page **_/Silent/tabsilentauthenticationstart.html_** se charge elle déclenche le code la méthode **_MSALLoginPopup()_**
+Lorsque la page **_/Silent/tabsilentauthenticationstart.html_** se charge elle déclenche la méthode **_MSALLoginPopup()_**
 
 ```JS
 function MSALLoginPopup() {
@@ -158,3 +158,6 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
  >Note : Je dois encore corriger quelques bugs lors de l'utilisation de cette exemple dans les clients teams de bureau et Mobile, stay tune !!
 
+Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante : 
+
+![Token]((https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentToken.png))
