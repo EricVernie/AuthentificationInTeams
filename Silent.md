@@ -160,4 +160,6 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
 Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante : 
 
-![Token]((https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentToken.png))
+![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentToken.png)
+
+Il est possible de décoder le Jeton avec le site jwt.ms
