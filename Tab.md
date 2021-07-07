@@ -171,7 +171,6 @@ Cette authentification ce fait selon les étapes suivantes :
 
     Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
 
-
 ## Mise en place
 
 1. Clonez le code
@@ -183,13 +182,8 @@ Cette authentification ce fait selon les étapes suivantes :
     [Inscription d'une application à page unique](./InscriptionAAD.md/#Authentification-application-à-page-unique)
 
 3. Ouvrez le fichier \scripts\authConfig.js et copiez l'**ID d'application (client)** obtenu à l'étape 4.1 lors de l'inscription de l'application dans le champ **clientId**
-
-
-4. Ouvrez le fichier \Manifest\manifest.json, et remplacez 
-
-5. Déployez l'application Teams
-
-
+4. Modifiez le fichier manifest et déployez l'application dans Teams
+    [Modification du fichier manifest](./teams.md)
 
 
 ## Autres méthodes d'authentification
