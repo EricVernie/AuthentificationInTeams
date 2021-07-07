@@ -172,3 +172,4 @@ Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illus
 [Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
 
 [L'authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)
+

@@ -79,7 +79,7 @@ Cette authentification ce fait selon les étapes suivantes :
     });
     ```
 
-    En lieu et place du flux [d'authentification implicite](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-implicit-grant-flow), il est **désormais conseillé** d'utiliser le flux [d'authenfication par code](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-auth-code-flow) pour une application monopage (SPA).
+    En lieu et place du flux [d'authentification implicite](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-implicit-grant-flow), il est **désormais conseillé** d'utiliser le flux [d'authenfication par code](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-auth-code-flow) pour une application à page unique (SPA).
 
     La mise en place de ce flux d'authorisation par code, va s'effectuer en échangeant une clé entre la page et le fournisseur d'identité, connue sous le nom de PKCE ([Proof Key For Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636)).
     
@@ -172,11 +172,23 @@ Cette authentification ce fait selon les étapes suivantes :
     Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
 
 
+## Mise en place
+
+1. Clonez le code
+
+    git clone https://github.com/EricVernie/AuthentificationInTeams.git
+
+2. Enregistrez l'application sur Azure Active Directory
+
+    [Inscription d'une application SPA](https://github.com/EricVernie/AuthentificationInTeams/blob/main/InscriptionSPA.md)
+
+
+
 
 ## Autres méthodes d'authentification
 
-[L'authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
+[Authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
 
-[L'authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)
+[Authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)
 
     

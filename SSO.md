@@ -307,8 +307,8 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
 [L'authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
 
+## Mise en place
 
-## Avant de pouvoir utiliser cette exemple.
 1. Clone the repos
 
 2. Enregistrez l'application dans Azure Active Directory.
