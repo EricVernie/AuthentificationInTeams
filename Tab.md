@@ -44,11 +44,11 @@ Cette authentification ce fait selon les étapes suivantes :
 
 2. La page **_tab/tabauthenticationstart.html_** est invoquée par le client Teams, c'est elle qui va présenter la page de consentements. 
 
-    ![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabConsentement.png)
+    ![consent](./images/TabConsentement.png)
 
     >Notes : Cette page de consentements, ne sera affichée qu'une seule fois. D'autre part, avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
 
-    ![Credential](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabCredentiels.png)
+    ![Credential](./images/TabCredentiels.png)
 
     ## tabauthenticationstart.html
 
