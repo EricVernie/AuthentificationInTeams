@@ -180,9 +180,16 @@ Cette authentification ce fait selon les étapes suivantes :
 
 2. Enregistrez l'application sur Azure Active Directory
 
-    [Inscription d'une application SPA](https://github.com/EricVernie/AuthentificationInTeams/blob/main/InscriptionSPA.md)
+    [Inscription d'une application à page unique](https://github.com/EricVernie/AuthentificationInTeams/blob/main/InscriptionAAD.md)
+
+3. Ouvrez le fichier \scripts\authConfig.js et copiez l'**ID d'application (client)** obtenu à l'étape 4.1 lors de l'inscription de l'application dans le champ **clientId**
 
 
+4. Ouvrez le fichier \Manifest\manifest.json, et remplacez 
+
+5. Déployez l'application Teams
+
+https://dev.teams.microsoft.com/home
 
 
 ## Autres méthodes d'authentification

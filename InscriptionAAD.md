@@ -1,5 +1,7 @@
-# Configurer une application Azure Active Directory pour une application à page unique (SSO)
+# inscrire une application Azure Active Directory
 
+
+## Pour une application à page unique
 
 1. Connectez-vous au portail [Azure Active Directory](https://aad.portal.azure.com)
 2. Selectionnez dans le panneau à gauche **Azure Active Directory**
@@ -24,17 +26,18 @@
 
     5.2 Choisissez  **Application à page unique**
 
-    5.3 Dans le champ **URI de redirection** entrez l'uri suivante : https://xxxxxxx/Tab/tabauthenticationend.html
+    5.3 Dans le champ **URI de redirection** entrez l'uri suivante : https://[votre nom domaine]/Tab/tabauthenticationend.html
     >**Ne pas cocher les cases Jetons d'accès, ni Jetons d'ID**
 
-    >Note : Pour l'uri de redirection, pour l'instant nous ne connaissons pas encore le nom de domaine de l'application, nous y reviendrons plus tard. 
+    >Note : Pour l'uri de redirection, il faudra rentrer votre nom de domaine, l'hôte sur lequel l'application tourne.
+    Peut être ngrok
 
     5.4 Cliquez le bouton **configurer**
 
     
 
 
-
+## Pour l'authentification SSO
 
 
 
