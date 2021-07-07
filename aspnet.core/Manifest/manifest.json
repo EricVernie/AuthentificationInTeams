@@ -57,7 +57,7 @@
     "messageTeamMembers"
   ],
   "validDomains": [
-    "*.yyyy.com"
+    "*.ngrok.io"
   ],
   "webApplicationInfo": {
     "id": "[CLIENT ID]",

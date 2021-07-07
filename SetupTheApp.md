@@ -10,7 +10,7 @@
 
 3. Mettez à jour avec les informations obtenues lors de l'enregistrement de l'application :
 
-    3.1 Pour .NET la section **AzureAD** dans le fichier **appsettings.json**.
+    3.1 Pour .NET à la section **AzureAD** dans le fichier **appsettings.json**.
     
     ```JSON
         {
@@ -22,6 +22,16 @@
             "ClientId": "[CLIENT ID]", 
             "ClientSecret": "CLIENT SECRET",    
         },
+    ```
+    et dans le fichier **ValideIssuers.cs** le numéro du locataire
+    
+    ```CSHARP
+     public static string[] GetListIssuers()
+        {
+            // Les GUID ici correspondent aux Id de Tenants Azure Active Directory
+            return new string[] { 
+                "https://login.microsoftonline.com/[TENANT ID]/v2.0"};
+        }
     ```
 
     3.2  Pour node.js la section **const config** du fichier **server.js**.
@@ -48,10 +58,78 @@
     ```
 
     3.4 Modifiez le fichier **Manifest\manifest.json** de microsoft teams en conséquence et déployez l'application dans Teams
+    Créez un nouvel ID d'application et remplacez la section **id**
+
+    Remplacez **https://yyy.yyyy.com** par votre FQDN
+
+    Et enfin à la section **webApplicationInfo** remplacez le l'id par votre client id et la resource
+
     ```JSON
-    "webApplicationInfo": {
-        "id": "[CLIENT ID]",
-        "resource": "api://yyy.yyyy.com/[CLIENT ID]"
+        {
+        "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
+        "manifestVersion": "1.9",
+        "version": "1.0.0",
+        "id": "[APPLICATION ID]",
+        "packageName": "com.teams.ev.fdd",
+        "developer": {
+            "name": "[Auteur]",
+            "websiteUrl": "https://yyy.yyyy.com",
+            "privacyUrl": "https://yyy.yyyy.com/privacy",
+            "termsOfUseUrl": "https://yyy.yyyy.com/termsofuse"
+        },
+        "icons": {
+            "color": "bot-icon-192x192.png",
+            "outline": "bot-icon-outline-32x32.png"
+        },
+        "name": {
+            "short": "Training Auth",
+            "full": "Training GSP"
+        },
+        "description": {
+            "short": "Training Auth in Teams 2021-06",
+            "full": "Demos Teams"
+        },
+        "accentColor": "#0EA20E",
+        "staticTabs": [
+            {
+            "entityId": "tabsso",
+            "name": "SSO",
+            "contentUrl": "https://yyy.yyyy.com/sso/sso.html",
+            "websiteUrl": "https://yyy.yyyy.com",
+            "scopes": [
+                "personal"
+            ]
+            },
+            {
+            "entityId": "tabsilent",
+            "name": "Silent",
+            "contentUrl": "https://yyy.yyyy.com/silent/tabsilentauthenticationstart.html",
+            "websiteUrl": "https://yyy.yyyy.com",
+            "scopes": [
+                "personal"
+            ]
+            },
+            {
+            "entityId": "tabauthentication",
+            "name": "Authentication",
+            "contentUrl": "https://yyy.yyyy.com/tab/tabauthenticate.html",
+            "websiteUrl": "https://yyy.yyyy.com",
+            "scopes": [
+                "personal"
+            ]
+            }
+        ],
+        "permissions": [
+            "identity",
+            "messageTeamMembers"
+        ],
+        "validDomains": [
+            "*.yyyy.com"
+        ],
+        "webApplicationInfo": {
+            "id": "[CLIENT ID]",
+            "resource": "api://yyy.yyyy.com/[CLIENT ID]"
+        }
     }
     ```
 

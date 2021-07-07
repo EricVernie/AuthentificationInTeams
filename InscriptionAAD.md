@@ -110,4 +110,15 @@ Si vous souhaitez utiliser la même application que pour l'application à page u
 8. Sélectionnez **API autorisées**. Sélectionnez **+ Ajouter une autorisation Microsoft** puis  > **Microsoft Graph** > **Autorisations déléguées**, puis ajoutez les   autorisations suivantes à partir de l'API Graph :
     User.Read activé par défaut, email, offline_access, OpenId, profil
 
+
+Avant de continuer, assurez-vous que vous bien copié 
+
+**Le client ID de l'application**
+
+**Le Secret de l'application**
+
+**Le numéro de locataire Azure Active Directory**
+
+Nous les réutiliserons dans la configuration de l'application
+
 Si vous souhaitez obtenir plus d'informations voir la [Documentation Officielle](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)

@@ -301,57 +301,12 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
 ![Token](./images/SSOToken.png)
 
-## Mise en place
+## Utilisation de l'application 
 
-1. Clonez le code
-
-    git clone https://github.com/EricVernie/AuthentificationInTeams.git
-
-2. Enregistrez l'application sur Azure Active Directory
-
-    [Inscription pour l'authentification SSO](./InscriptionAAD.md/#Authentification-SSO)
-
-3. Mettez à jour avec les informations obtenues lors de l'enregistrement de l'application :
-
-    * Pour .NET la section **AzureAD** dans le fichier **appsettings.json**.
-    ```JSON
-    {
-    "AzureAd": {
-        "Instance": "https://login.microsoftonline.com/",
-        "Domain": "[NOM DE DOMAINE]",
-        "Audience": "[CLIENT ID]", 
-        "TenantId": "[TENANT ID]", 
-        "ClientId": "[CLIENT ID]", 
-        "ClientSecret": "CLIENT SECRET",    
-    },
-
-    ```
-    
-    * Pour node.js la section **const config** du fichier **server.js**
-
-    ```JS
-    const config = {
-    auth: {
-        clientId: "[CLIENT ID]"
-        authority: "https://login.microsoftonline.com/[TENANT ID]", 
-        clientSecret: "[CLIENT SECRET]",
-    }
-    };
-    ```
-
-4. Ouvrez le fichier **\scripts\authConfig.js** et copiez l'**ID d'application (client)** obtenu à l'étape 4.1 lors de l'inscription de l'application dans le champ **clientId**
-
-5. Modifiez le fichier manifest de microsoft teams en conséquence et déployez l'application dans Teams
-    ```JSON
-    "webApplicationInfo": {
-        "id": "[CLIENT ID]",
-        "resource": "api://yyy.yyyy.com/[CLIENT ID]"
-    }
-    ```
-    
+[Voir](./SetupTheApp.md)
 
 ## Parcourir les autres méthodes d'authentification
 
-[Le flux d'authentification dans les onglets](./Tab.md)
+[Authentification dans les onglets](./Tab.md)
 
-[L'authentification en mode silencieux](./Silent.md)
+[Authentification en mode silencieux](./Silent.md)

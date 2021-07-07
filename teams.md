@@ -10,15 +10,6 @@ Le fichier manifest
 
 
 
-
-
-
-
-
-
-
-
-
 Ajoutez la section
 ```JSON
   "webApplicationInfo": {

@@ -15,8 +15,7 @@ namespace AuhtInTeams
         {
             // Les GUID ici correspondent aux Id de Tenants Azure Active Directory
             return new string[] { 
-                "https://login.microsoftonline.com/38afde78-8c0b-41f8-b6a7-1f145a83aa9f/v2.0", 
-                "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0" };
+                "https://login.microsoftonline.com/[TENANT ID]/v2.0"};
         }
     }
 }
