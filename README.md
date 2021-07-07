@@ -54,10 +54,11 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
 
 ## Authentification SSO
 
-Arrivée plus récement, elle permet de récupèrer en un seul appel de fonction le Jeton de l'utilisateur authentifié. 
-Néanmoins ce jeton n'étant pas porteur d'autorisations, il faudra l'utiliser en conjonction avec le flux oauth2 [on-behalf-of](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow)
+Arrivée plus récement, elle permet de récupèrer en un seul appel de fonction le jeton de l'utilisateur authentifié. 
 
-L'application Teams ici est une application de type SPA, mais du faite que nous ayons à implémenter le flux on-behalf-of, nous avons besoin d'utiliser un middleware, c'est pour cette raison que vous retrouverez deux projets avec leur middleware associé
+Néanmoins ce jeton n'étant porteur que d'un ensemble limité d'autorisations (email, profile,offline_access and OpenId ), il faudra l'utiliser en conjonction avec le flux oauth2 [on-behalf-of](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow) afin d'obtenir des autorisations plus importantes pour l'API Microsoft Graph.
+
+Du du faite que nous ayons à implémenter le flux on-behalf-of, nous avons besoin d'utiliser un middleware une API Backend, c'est pour cette raison que vous retrouverez deux projets avec leur middleware associé.
 
     /aspnet.core
             /wwwroot
