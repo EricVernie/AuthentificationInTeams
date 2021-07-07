@@ -194,8 +194,8 @@ Cette authentification ce fait selon les étapes suivantes :
 
 ## Autres méthodes d'authentification
 
-[Authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
+[Authentification en mode silencieux](./Silent.md)
 
-[Authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)
+[Authentification SSO](./SSO.md)
 
     
