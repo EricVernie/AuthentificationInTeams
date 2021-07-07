@@ -1,10 +1,24 @@
-# [Le flux d'authentification dans les onglets](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-flow-tab)
+# [Authentification dans les onglets](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-flow-tab)
+
+Ce flux d'authentification originel, utilise des méthodes du [SDK client Teams](https://docs.microsoft.com/fr-fr/javascript/api/overview/msteams-client?view=msteams-client-js-latest), en conjonction avec les points d'entrées d'Azure Active Directory d'authentification et d'authorisation.
+
+En d'autres termes, il se suffit à lui même, il n'utilise pas de librairie tier pour l'acquisition de Jeton, mais exécute des requêtes HTTP directement sur les points d'entrées 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize' et 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+
+Vous retrouverez les exemples de code ici
+
+    /aspnet.core
+            /wwwroot
+                /Tab            
+    /node.js
+        /public
+               /Tab    
 
 Cette authentification ce fait selon les étapes suivantes : 
 
-
 1. Lorsque la page **_/tab/tabauthenticate.html_** se charge, elle déclenche la méthode **_Authenticate()_**
+    
     ## tabauthenticate.html
+
     ```JS
     function Authenticate() {
     microsoftTeams.initialize();
@@ -65,7 +79,7 @@ Cette authentification ce fait selon les étapes suivantes :
     });
     ```
 
-    En lieu et place du flux [d'authentification implicite](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-implicit-grant-flow), il est **désormais conseillé** d'utiliser le flux [d'authenfication par code](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-auth-code-flow) pour une application SPA.
+    En lieu et place du flux [d'authentification implicite](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-implicit-grant-flow), il est **désormais conseillé** d'utiliser le flux [d'authenfication par code](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-auth-code-flow) pour une application monopage (SPA).
 
     La mise en place de ce flux d'authorisation par code, va s'effectuer en échangeant une clé entre la page et le fournisseur d'identité, connue sous le nom de PKCE ([Proof Key For Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636)).
     
@@ -82,7 +96,7 @@ Cette authentification ce fait selon les étapes suivantes :
     ```JS    
     localStorage.setItem("codeVerifier", originalCode);
     ```
-    Enfin on va définir les paramètres de la demande d'authorisation du point d'entrée v2.0 d'Azure Active Directory
+    Enfin on va définir les paramètres de la demande d'authorisation du point d'entrée v2.0 d'Azure Active Directory https://login.microsoftonline.com/common/oauth2/v2.0/authorize
 
     | Paramètres| Description |
     | ------------- |:-------------|
@@ -97,23 +111,7 @@ Cette authentification ce fait selon les étapes suivantes :
     |**_code_challenge_method_**| La méthode utilisée d'encodage du paramètre code_challenge|
 
 3. Une fois authentifié, Azure Active Directory renvoi le code via la page **_/tab/tabauthenticationend.html?#code=XXXXXXX_**
-    
-    Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/tab/tabauthenticate.html_** qui sera traitée par la méthode **_failureCallback_**
-
-    Si l'authentification réussie, on va utiliser ce code de retour afin d'obtenir un jeton d'accès.
-
-    Pour obtenir ce jeton on utilise le point d'entrée https://login.microsoftonline.com/common/oauth2/v2.0/token en lui spécifiant les paramètres suivants : 
-
-    | Paramètres| Description |
-    | ------------- |:-------------|
-    |**_client_id_**| Id de l'application enregistrée sur Azure Active Directory. Pour l'inscription d'une application sur Azure Active Directory se référrer à l'article [Inscription d'une application SPA](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/scenario-spa-app-registration#redirect-uri-msaljs-20-with-auth-code-flow) |
-    |**_code_**| Le code renvoyé par Azure Active Directory lors de l'authentification|
-    |**_grant_type_**| Spécifie quel flux d'authorisation nous utilisons|
-    | **_code_verifier_**| Le code de vérification à utiliser, qui doit être en adéquation avec celui utilisé lors de l'authentification |
-
-    Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(result)_** est invoquée et renvoie le résultat à la page **_/tab/tabauthenticate.html_** qui sera traité par la méthode **_successCallback_**
-
-    ## tabauthenticationend.html
+      ## tabauthenticationend.html
 
     ```JS
     microsoftTeams.initialize()
@@ -152,11 +150,28 @@ Cette authentification ce fait selon les étapes suivantes :
         }
     ```
 
+    Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/tab/tabauthenticate.html_** qui sera traitée par la méthode **_failureCallback_**
+
+    Si l'authentification réussie, on va utiliser ce **code** afin d'obtenir un jeton.
+
+    Pour obtenir ce jeton on utilise le point d'entrée https://login.microsoftonline.com/common/oauth2/v2.0/token en lui spécifiant les paramètres suivants :
+
+    | Paramètres| Description |
+    | ------------- |:-------------|
+    |**_client_id_**| Id de l'application enregistrée sur Azure Active Directory. Pour l'inscription d'une application sur Azure Active Directory se référrer à l'article [Inscription d'une application SPA](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/scenario-spa-app-registration#redirect-uri-msaljs-20-with-auth-code-flow) |
+    |**_code_**| Le code renvoyé par Azure Active Directory lors de l'authentification|
+    |**_grant_type_**| Spécifie quel flux d'authorisation nous utilisons|
+    | **_code_verifier_**| Le code de vérification à utiliser, qui doit être en adéquation avec celui utilisé lors de l'authentification |
+
+    Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(result)_** est invoquée et renvoie le résultat à la page **_/tab/tabauthenticate.html_** qui sera traité par la méthode **_successCallback_**
+
     Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante : 
 
     ![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabToken.png)
 
     Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
+
+
 
 ## Autres méthodes d'authentification
 

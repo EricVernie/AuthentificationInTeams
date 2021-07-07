@@ -14,24 +14,31 @@ Curieusement, il existe différentes manières d'obtenir ce jeton
 * [Authentification silencieuse](#Authentification-en-mode-silencieux)
 * [Authentification SSO](#Authentification-SSO)
 
-ceci est du au faite de l'évolution de Microsoft Teams dans le temps.
+Ceci est du au faite de l'évolution de Microsoft Teams dans le temps.
 
 ## Authentification dans les onglets
 
-Ce flux d'authentification, utilise des méthodes du [SDK client Teams](https://docs.microsoft.com/fr-fr/javascript/api/overview/msteams-client?view=msteams-client-js-latest), en conjonction avec les points d'entrés d'Azure Active Directory d'authentification et d'authorisation de la forme https://login.microsoftonline.com/[Tenant ID]/oauth2/v2.0/authorize et https://login.microsoftonline.com/[Tenant Id]/oauth2/v2.0/token
+Ce flux d'authentification originel, utilise des méthodes du [SDK client Teams](https://docs.microsoft.com/fr-fr/javascript/api/overview/msteams-client?view=msteams-client-js-latest), en conjonction avec les points d'entrées d'Azure Active Directory d'authentification et d'authorisation.
 
-En d'autres termes, il se suffit à lui même, nous n'utiliserons pas de librairie tier pour l'acquisition de Jeton.
+En d'autres termes, il se suffit à lui même, il n'utilise pas de librairie tier pour l'acquisition de Jeton, mais exécute des requêtes HTTP directement sur les points d'entrées 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize' et 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
 
-[Démarrer avec le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
+Retrouvez directement les exemples de code ici
+
+    /aspnet.core
+            /wwwroot
+                /Tab            
+    /node.js
+        /public
+               /Tab    
+
+Ou alors continuez la lecture [Démarrer avec l'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
+
 
 Si vous souhaitez aller plus loin voir la [Documentation](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-flow-tab).
 
 ## Authentification en mode silencieux
 
 Ce flux d'authentification utilise la librairie [MSAL.js v2 pour navigateur](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser), et on l'appel mode silencieux, car la librairie va permettre de mettre en cache local, le compte de l'utilisateur authentifié, et obtenir lors des appels suivants un jeton de maniere silencieuse, c'est à dire sans intéraction avec l'utilisateur.
-
-
-
 
 
 • [L'authentification en mode silencieux](https://docs.microsoft.com/fr-fr/microsoftteams/platform/concepts/authentication/authentication) : Utilise la librairie 
@@ -51,8 +58,6 @@ L'application Teams ici est une application de type SPA, mais du faite que nous 
                 /SSO
             /Controllers
                 /authcontroller.cs
-
-
 
     /node.js
         /public
