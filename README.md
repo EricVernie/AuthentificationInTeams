@@ -31,7 +31,7 @@ Retrouvez directement les exemples de code ici
         /public
                /Tab    
 
-Ou alors continuez la lecture [Démarrer avec l'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
+Ou alors continuez la lecture [Démarrer avec l'authentification dans les onglets](./Tab.md)
 
 Si vous souhaitez aller plus loin voir la [Documentation](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-flow-tab).
 

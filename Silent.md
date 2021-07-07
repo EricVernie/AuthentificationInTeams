@@ -85,11 +85,11 @@ Si c'est la 1ere fois que l'utilisateur utilise l'application, la méthode écho
 
 C'est alors que l'on demande à l'utilisateur de s'authentifier et d'approuver les consentements.
 
-![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentConsentement.png)
+![consent](./images/SilentConsentement.png)
 
 >Notes : Cette page de consentement, ne sera affichée qu'une seule fois. D'autre part, avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
 
-![Credential](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentCredentiels.png)
+![Credential](./images/SilentCredentiels.png)
 
 Vous aurez noté, qu'il est possible de récupèrer le context Microsoft Teams dans lequel tourne l'application. **_microsoftTeams.getContext(function (context)_**.
 
@@ -165,11 +165,11 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
 Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante : 
 
-![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SilentToken.png)
+![Token](./images/SilentToken.png)
 
 ## Autres méthodes d'authentification
 
-[Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
+[Le flux d'authentification dans les onglets](./Tab.md)
 
-[L'authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)
+[L'authentification SSO](./SSO.md)
 
