@@ -57,6 +57,7 @@ cache: {
     storeAuthStateInCookie: false, 
 },
 ```
+
 | Paramètres| Description |
 | ------------- |:-------------|
 |**_clientId_**| Id de l'application enregistrée sur Azure Active Directory. Pour l'inscription d'une application sur Azure Active Directory se référrer à l'article [Inscription d'une application SPA](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/scenario-spa-app-registration#redirect-uri-msaljs-20-with-auth-code-flow) |
@@ -93,7 +94,7 @@ C'est alors que l'on demande à l'utilisateur de s'authentifier et d'approuver l
 
 Vous aurez noté, qu'il est possible de récupèrer le context Microsoft Teams dans lequel tourne l'application. **_microsoftTeams.getContext(function (context)_**.
 
-L'objet context expose la propriété **_.hostClientType_** qui sera alors possible de tester pour savoir si l'application tourne dans la version Web du client Teams ou tout autre client. 
+L'objet context expose la propriété **_.hostClientType_** qui sera alors possible de tester pour savoir si l'application tourne dans la version Web du client Teams ou tout autre client.
 
 Comme la méthode **_acquiereTokenPopup()_** ne fonctionne pas "encore" sur les clients Teams de bureau et mobile, nous invoquons une autre méthode **_MSALPopupRedirect()_** pour l'authentification.
 
@@ -163,32 +164,17 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
  >Note : Je dois encore corriger quelques bugs lors de l'utilisation de cette exemple dans les clients teams de bureau et Mobile, stay tune !!
 
-Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante : 
+Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante :
 
 ![Token](./images/SilentToken.png)
 
 
-## Mise en place
+## Utilisation de l'application 
 
-1. Clonez le code
-
-    git clone https://github.com/EricVernie/AuthentificationInTeams.git
-
-2. Enregistrez l'application sur Azure Active Directory
-
-    [Inscription d'une application à page unique](./InscriptionAAD.md/#Authentification-application-à-page-unique)
-
-3. Ouvrez le fichier \scripts\authConfig.js et copiez l'**ID d'application (client)** obtenu à l'étape 4.1 lors de l'inscription de l'application dans le champ **clientId**
-4. Modifiez le fichier manifest et déployez l'application dans Teams
-    [Modification du fichier manifest](./teams.md)
-
-[A FINIR]
-
-
+[Voir](./SetupTheApp.md)
 
 ## Autres méthodes d'authentification
 
-[Le flux d'authentification dans les onglets](./Tab.md)
+[Authentification dans les onglets](./Tab.md)
 
-[L'authentification SSO](./SSO.md)
-
+[Authentification SSO](./SSO.md)

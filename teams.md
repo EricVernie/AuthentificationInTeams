@@ -1,6 +1,6 @@
 # Déployez l'application Microsoft Teams
 
-
+Le fichier manifest
 
 ## Mise à jour du fichier manifest.json
 

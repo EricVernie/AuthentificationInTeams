@@ -29,8 +29,7 @@
     <!-- Microsoft Teams JavaScript API (via CDN) -->
     <script src="https://statics.teams.microsoft.com/sdk/v1.6.0/js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>
-    <script type="text/javascript" src="../scripts/authConfig.js"></script>
+    <script type="text/javascript" src="https://alcdn.msauth.net/browser/2.14.2/js/msal-browser.min.js"></script>    
     <script type="text/javascript">
         $(document).ready(function () {
             $("#btnConsent").hide();
@@ -55,10 +54,7 @@
 
         function GetServerSideToken() {
             $("#btnConsent").hide();
-            var teamsToken = $('#TeamsTokens').text();
-            // Il est possible qu'il faille demander des consentements admin par exemple.
-            // https://login.microsoftonline.com/common/adminconsent?client_id=<AAD_App_ID>
-            // ou alors si cela échoue .... il est alors possible d'utiliser MSAL.JS pour obtenir un jeton de manière silencieuse
+            var teamsToken = $('#TeamsTokens').text();            
             $.ajax({
                 url: window.location.origin.toLowerCase() + "/token",
                 headers: {

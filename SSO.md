@@ -79,7 +79,7 @@ La configuration pour Azure Active Directory se trouve dans le fichier appsettin
 | ClientId | Le client Id de l'application enregistrée sur Azure Active Directory |
 | ClientSecret** | Le secret de l'application enregistrée sur Azure Active Directory |
 
->** Il ne faut **JAMAIS** laisser de secret dans son application. Mais pour des raisons de simplicité ici je l'accepte. Néanmoins il est préférable d'utiliser des services externes pour protéger les secrets, comme des coffres forts, style Azure Keyvault.
+>**Il ne faut **JAMAIS** laisser de secret dans son application. Mais pour des raisons de simplicité ici je l'accepte. Néanmoins il est préférable d'utiliser des services externes pour protéger les secrets, comme des coffres forts, style Azure Keyvault.
 
 La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le service **_ITokenAcquisition_** qu'il sera possible d'utiliser dans le controller **_authController.cs_**, afin d'obtenir un jeton d'accès avec le flux on-behalf-of.
 
@@ -291,35 +291,67 @@ C'est la méthode **_msaClient.LoginRedirect()_** qui affichera la page d'authen
 
 >Note : Avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
 
-![Credential](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOCredentiels.png)
+![Credential](./images/SSOCredentiels.png)
 
 Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/SSO/SSO.html_** traitée par la méthode **_failureCallback_**
 
  Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(tokenResponse)_** est invoquée et renvoie le résultat à la page **_/SSO/SSO.html_** traité par la méthode **_successCallback_**
 
- Enfin, vous devriez obtenir une page comme illustré sur la figure suivante : 
+ Enfin, vous devriez obtenir une page comme illustré sur la figure suivante.
 
-![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOToken.png)
-
-## Autres méthodes d'authentification
-
-[Le flux d'authentification dans les onglets](./Tab.md)
-
-[L'authentification en mode silencieux]./Silent.md)
+![Token](./images/SSOToken.png)
 
 ## Mise en place
 
-1. Clone the repos
+1. Clonez le code
 
-2. Enregistrez l'application dans Azure Active Directory.
+    git clone https://github.com/EricVernie/AuthentificationInTeams.git
 
-    Pour obtenir la procédure détaillée à suivre, consultez [Inscription approfondie de votre application via le portail Azure](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso#registering-your-app-through-the-azure-active-directory-portal-in-depth)
+2. Enregistrez l'application sur Azure Active Directory
 
-3. Mettez à jour :
+    [Inscription pour l'authentification SSO](./InscriptionAAD.md/#Authentification-SSO)
 
-    * Pour .NET la section **AzureAD** dans le fichier **appsettings.json** avec les informations obtenues lors de l'enregistrement de l'application.
+3. Mettez à jour avec les informations obtenues lors de l'enregistrement de l'application :
 
-    * Pour node.js la section **const config** du fichier server.js
+    * Pour .NET la section **AzureAD** dans le fichier **appsettings.json**.
+    ```JSON
+    {
+    "AzureAd": {
+        "Instance": "https://login.microsoftonline.com/",
+        "Domain": "[NOM DE DOMAINE]",
+        "Audience": "[CLIENT ID]", 
+        "TenantId": "[TENANT ID]", 
+        "ClientId": "[CLIENT ID]", 
+        "ClientSecret": "CLIENT SECRET",    
+    },
 
-    * Enfin pour les 
+    ```
+    
+    * Pour node.js la section **const config** du fichier **server.js**
 
+    ```JS
+    const config = {
+    auth: {
+        clientId: "[CLIENT ID]"
+        authority: "https://login.microsoftonline.com/[TENANT ID]", 
+        clientSecret: "[CLIENT SECRET]",
+    }
+    };
+    ```
+
+4. Ouvrez le fichier **\scripts\authConfig.js** et copiez l'**ID d'application (client)** obtenu à l'étape 4.1 lors de l'inscription de l'application dans le champ **clientId**
+
+5. Modifiez le fichier manifest de microsoft teams en conséquence et déployez l'application dans Teams
+    ```JSON
+    "webApplicationInfo": {
+        "id": "[CLIENT ID]",
+        "resource": "api://yyy.yyyy.com/[CLIENT ID]"
+    }
+    ```
+    
+
+## Parcourir les autres méthodes d'authentification
+
+[Le flux d'authentification dans les onglets](./Tab.md)
+
+[L'authentification en mode silencieux](./Silent.md)

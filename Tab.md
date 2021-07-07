@@ -165,33 +165,18 @@ Cette authentification ce fait selon les étapes suivantes :
 
     Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(result)_** est invoquée et renvoie le résultat à la page **_/tab/tabauthenticate.html_** qui sera traité par la méthode **_successCallback_**
 
-    Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante : 
+    Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante :
 
     ![Token](./images/TabToken.png)
 
     Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
 
-## Mise en place
+## Utilisation de l'application 
 
-1. Clonez le code
-
-    git clone https://github.com/EricVernie/AuthentificationInTeams.git
-
-2. Enregistrez l'application sur Azure Active Directory
-
-    [Inscription d'une application à page unique](./InscriptionAAD.md/#Authentification-application-à-page-unique)
-
-3. Ouvrez le fichier \scripts\authConfig.js et copiez l'**ID d'application (client)** obtenu à l'étape 4.1 lors de l'inscription de l'application dans le champ **clientId**
-4. Modifiez le fichier manifest et déployez l'application dans Teams
-    [Modification du fichier manifest](./teams.md)
-
-[A FINIR]
-
+[Voir](./SetupTheApp.md)
 
 ## Autres méthodes d'authentification
 
 [Authentification en mode silencieux](./Silent.md)
 
 [Authentification SSO](./SSO.md)
-
-    
