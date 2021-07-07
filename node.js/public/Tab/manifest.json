@@ -23,25 +23,7 @@
     "full": "Demos Teams"
   },
   "accentColor": "#0EA20E",
-  "staticTabs": [
-    {
-      "entityId": "tabsso",
-      "name": "SSO",
-      "contentUrl": "https://yyy.yyyy.com/sso/sso.html",
-      "websiteUrl": "https://yyy.yyyy.com",
-      "scopes": [
-        "personal"
-      ]
-    },
-    {
-      "entityId": "tabsilent",
-      "name": "Silent",
-      "contentUrl": "https://yyy.yyyy.com/silent/tabsilentauthenticationstart.html",
-      "websiteUrl": "https://yyy.yyyy.com",
-      "scopes": [
-        "personal"
-      ]
-    },
+  "staticTabs": [   
     {
       "entityId": "tabauthentication",
       "name": "Authentication",

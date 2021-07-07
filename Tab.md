@@ -185,6 +185,8 @@ Cette authentification ce fait selon les étapes suivantes :
 4. Modifiez le fichier manifest et déployez l'application dans Teams
     [Modification du fichier manifest](./teams.md)
 
+[A FINIR]
+
 
 ## Autres méthodes d'authentification
 

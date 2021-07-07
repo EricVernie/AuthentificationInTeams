@@ -31,44 +31,46 @@ Retrouvez directement les exemples de code ici
         /public
                /Tab    
 
-Ou alors continuez la lecture [Démarrer avec l'authentification dans les onglets](./Tab.md)
+Ou alors continuez la lecture [Démarrer avec l'authentification dans les onglets](./Tab.md).
 
-Si vous souhaitez aller plus loin voir la [Documentation](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-flow-tab).
+Si vous souhaitez aller plus loin voir la [Documentation officielle](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-flow-tab).
 
 ## Authentification en mode silencieux
 
-Ce flux d'authentification utilise la librairie [MSAL.js v2 pour navigateur](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser), et on l'appel mode silencieux, car la librairie va permettre de mettre en cache local, le compte de l'utilisateur authentifié, et obtenir lors des appels suivants un jeton de maniere silencieuse, c'est à dire sans intéraction avec l'utilisateur.
+Ce flux d'authentification utilise la librairie [MSAL.js v2 pour navigateur](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser), et on l'appel mode silencieux, car elle va permettre de mettre en cache local le compte de l'utilisateur authentifié, afin d'obtenir lors des appels suivants un jeton de maniere silencieuse, c'est à dire sans intéraction avec l'utilisateur.
 
-
-• [L'authentification en mode silencieux](https://docs.microsoft.com/fr-fr/microsoftteams/platform/concepts/authentication/authentication) : Utilise la librairie 
-
-## Authentification SSO
-
-• [L'authentification SSO](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) : 
-Arrivée plus récement, elle permet de récupèrer en un seul appel de fonction le Jeton de l'utilsateur authentifié. Néanmoins ce jeton n'étant pas porteur d'autorisations, il faudra l'utiliser en conjonction avec le flux oauth2 [on-behalf-of](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow)
-
-L'application Teams ici est une application de type SPA, mais du faite que nous ayons à implémenter le flux on-behalf-of, nous avons besoin d'utiliser un middleware, c'est pour cette raison que vous retrouverez deux projets avec leur middleware associé
-
+Retrouvez directement les exemples de code ici
 
     /aspnet.core
             /wwwroot
-                /Tab
-                /Silent
+                /Silent            
+    /node.js
+        /public
+               /Silent    
+
+Ou alors continuez la lecture [Démarrez avec l'authentification en mode silencieux](./Silent.md).
+
+Si vous souhaitez aller plus loin voir la [Documentation officielle](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-silent-aad)
+
+## Authentification SSO
+
+Arrivée plus récement, elle permet de récupèrer en un seul appel de fonction le Jeton de l'utilisateur authentifié. 
+Néanmoins ce jeton n'étant pas porteur d'autorisations, il faudra l'utiliser en conjonction avec le flux oauth2 [on-behalf-of](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow)
+
+L'application Teams ici est une application de type SPA, mais du faite que nous ayons à implémenter le flux on-behalf-of, nous avons besoin d'utiliser un middleware, c'est pour cette raison que vous retrouverez deux projets avec leur middleware associé
+
+    /aspnet.core
+            /wwwroot
                 /SSO
             /Controllers
                 /authcontroller.cs
 
     /node.js
         /public
-                /Tab
-                /Silent
                 /SSO
     server.js
 
-Vous trouverez donc dans ce repos le code des trois manières de faire sous leur arborescence respective et pour des raisons de simplicité et de compréhension le code Javascript est inclus directement dans des pages html (que les pros du javascript ne m'en veuillent pas trop).
 
-[Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
+[Démarrez avec l'authentification SSO](./SSO.md).
 
-[L'authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
-
-[L'authentification SSO](https://github.com/EricVernie/AuthentificationInTeams/blob/main/SSO.md)
+Si vous souhaitez aller plus loin voir la [Documentation officielle](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) 
