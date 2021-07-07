@@ -167,6 +167,25 @@ Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illus
 
 ![Token](./images/SilentToken.png)
 
+
+## Mise en place
+
+1. Clonez le code
+
+    git clone https://github.com/EricVernie/AuthentificationInTeams.git
+
+2. Enregistrez l'application sur Azure Active Directory
+
+    [Inscription d'une application à page unique](./InscriptionAAD.md/#Authentification-application-à-page-unique)
+
+3. Ouvrez le fichier \scripts\authConfig.js et copiez l'**ID d'application (client)** obtenu à l'étape 4.1 lors de l'inscription de l'application dans le champ **clientId**
+4. Modifiez le fichier manifest et déployez l'application dans Teams
+    [Modification du fichier manifest](./teams.md)
+
+[A FINIR]
+
+
+
 ## Autres méthodes d'authentification
 
 [Le flux d'authentification dans les onglets](./Tab.md)

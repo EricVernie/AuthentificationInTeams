@@ -223,7 +223,7 @@ Si l'appel de l'API backend réussi, on affiche le jeton d'accès.
 
 Néanmoins la 1ere fois que l'application est utilisée par l'utilisateur de Microsoft Teams, il y a de grandes chances qu'elle échoue comme illustré sur la figure suivante :
 
-![invalidgrant](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOInvalidGrant.png)
+![invalidgrant](./images/SSOInvalidGrant.png)
 
 Le code d'erreur **invalid_grant** signifie que l'utilisateur doit consentir des droits à l'application.
 
@@ -285,9 +285,9 @@ Lorsque la page **_authPopupRedirect_** se charge elle exécute le code suivant 
         });
 ```
 
-C'est la méthode **_msaClient.LoginRedirect()_** qui affichera la page d'authentification et de consentement à l'utilisateur comme illustré sur l'image suivante : 
+C'est la méthode **_msaClient.LoginRedirect()_** qui affichera la page d'authentification et de consentement à l'utilisateur comme illustré sur l'image suivante :
 
-![consent](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/SSOConsentements.png)
+![consent](./images/SSOConsentements.png)
 
 >Note : Avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
 
@@ -303,9 +303,9 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
 ## Autres méthodes d'authentification
 
-[Le flux d'authentification dans les onglets](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md)
+[Le flux d'authentification dans les onglets](./Tab.md)
 
-[L'authentification en mode silencieux](https://github.com/EricVernie/AuthentificationInTeams/blob/main/Silent.md)
+[L'authentification en mode silencieux]./Silent.md)
 
 ## Mise en place
 
