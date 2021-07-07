@@ -167,7 +167,7 @@ Cette authentification ce fait selon les étapes suivantes :
 
     Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante : 
 
-    ![Token](https://github.com/EricVernie/AuthentificationInTeams/blob/main/images/TabToken.png)
+    ![Token](./images/TabToken.png)
 
     Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
 
