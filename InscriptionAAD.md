@@ -1,7 +1,7 @@
-# inscrire une application Azure Active Directory
+# Inscrire une application Azure Active Directory
 
 
-## Pour une application à page unique
+## Authentification application à page unique
 
 1. Connectez-vous au portail [Azure Active Directory](https://aad.portal.azure.com)
 2. Selectionnez dans le panneau à gauche **Azure Active Directory**
@@ -37,7 +37,7 @@
     
 
 
-## Pour l'authentification SSO
+## Authentification SSO
 
 
 
