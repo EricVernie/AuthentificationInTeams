@@ -172,7 +172,6 @@ Cette authentification ce fait selon les étapes suivantes :
 
     >Note : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
 
-
 ## Parcourir les autres méthodes d'authentification
 
 [Authentification en mode silencieux](./Silent.md)
