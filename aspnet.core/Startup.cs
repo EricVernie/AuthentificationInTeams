@@ -73,6 +73,7 @@ namespace AuhtInTeams
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuhtInTeams", Version = "v1" });
             });
             services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +81,10 @@ namespace AuhtInTeams
         {
             if (env.IsDevelopment())
             {
+                app.UseCors(builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuhtInTeams v1"));

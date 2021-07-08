@@ -180,7 +180,7 @@ Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'
     
 1. Créez un nouveau GUID d'application et remplacez le parametre **"id":"[APPLICATION ID]"**
 
-2. Pour la section **staticTabs** remplacez toutes les propriétés **"contentUrl":** avec votre FQDN, ou alors si vous testez en locale avec ngrok par un FQDN du type XXXXX.ngrock.io.
+2. Pour la section **staticTabs** remplacez toutes les propriétés **"contentUrl":** avec votre FQDN, ou si vous testez en locale avec ngrok par un FQDN du type XXXXX.ngrock.io.
 
 3. Enfin à la section **webApplicationInfo** indiquez le Client id et l'uri de la ressource qui doit être de la forme api://FQDN/[CLIENT ID].
 
@@ -191,6 +191,14 @@ Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'
 
     git clone https://github.com/EricVernie/AuthentificationInTeams.git
 
-2. pour .
+2. dotnet run 
+
+3. run ngrok afin d'exposer 
+
+
+4. modifiez le manifest teams et le manifest aad
+
 
 ## Etape 4 : Installation de l'application dans Teams
+
+1. Zipper le manifest avec les deux images et installer l'application dans Teams.
