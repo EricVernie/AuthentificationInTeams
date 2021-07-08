@@ -83,7 +83,6 @@ La configuration pour Azure Active Directory se trouve dans le fichier appsettin
 
 La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le service **_ITokenAcquisition_** qu'il sera possible d'utiliser dans le controller **_authController.cs_**, afin d'obtenir un jeton d'accès avec le flux on-behalf-of.
 
-
 ## authController.cs
 
 ```CSharp

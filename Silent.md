@@ -169,10 +169,6 @@ Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illus
 ![Token](./images/SilentToken.png)
 
 
-## Utilisation de l'application 
-
-[Voir](./SetupTheApp.md)
-
 ## Autres méthodes d'authentification
 
 [Authentification dans les onglets](./Tab.md)

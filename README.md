@@ -193,3 +193,4 @@ Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'
 
 2. pour .
 
+## Etape 4 : Installation de l'application dans Teams
