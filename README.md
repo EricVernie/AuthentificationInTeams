@@ -32,8 +32,6 @@ Retrouvez directement les exemples de code ici
 
 Sinon continuez la lecture [Démarrer avec l'authentification dans les onglets](./Tab.md).
 
-
-
 ## Authentification en mode silencieux
 
 Ce flux d'authentification utilise la librairie [MSAL.js v2 pour navigateur](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser), et on l'appel mode silencieux, car elle va permettre de mettre en cache local le compte de l'utilisateur authentifié, afin d'obtenir lors des appels suivants un jeton de maniere silencieuse, c'est à dire sans intéraction avec l'utilisateur.
@@ -79,7 +77,6 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
 
 ### Etape 1: Inscrire une application Azure Active Directory
 
-# Inscrire une application Azure Active Directory
 
 1. Connectez-vous au portail [Azure Active Directory](https://aad.portal.azure.com)
 2. Selectionnez dans le panneau à gauche **Azure Active Directory**
@@ -171,7 +168,7 @@ Nous les réutiliserons dans la configuration de l'application
 
 1. .NET
 
-    1.1 Dans le fichier [appsettings.json](.\aspnet.core\appsettings.json) Modifiez les paramètres **Audience**, la section **AzureAd** du fichier  avec les informations 
+    1.1 Dans le fichier [appsettings.json](./aspnet.core/appsettings.json) Modifiez les paramètres **Audience**, la section **AzureAd** du fichier  avec les informations 
 
 
 
