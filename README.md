@@ -176,7 +176,7 @@ Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'
 
     2.2 Dans le fichier [authConfig.js](./node.js/scripts/authConfig.js) , modifiez la propriété **clientId** avec la valeur obtenue à l'étape 4.1 lors de l'inscription de l'application dans Azure Active Directory
 
-### Etape 3 : Mise à jour du fichier [Manifest de Teams ](./manifestteams/manifest.json)
+### Etape 3 : Mise à jour du fichier [Manifeste de Teams ](./manifestteams/manifest.json)
     
 1. Créez un nouveau GUID d'application et remplacez le parametre **"id":"[APPLICATION ID]"**
 
@@ -191,14 +191,29 @@ Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'
 
     git clone https://github.com/EricVernie/AuthentificationInTeams.git
 
-2. dotnet run 
+2. .NET
+    
+    2.1 Allez dans le repertoire aspnet_core
+    2.2 Entrez la command : **dotnet run**
+    l'application démarre sur les ports 5001 et 5000
 
-3. run ngrok afin d'exposer 
+3. node.js
 
+4. Exécutez ngrok afin d'exposer tunnel : **ngrok http 5000 --host-header=localhost:5000**
 
-4. modifiez le manifest teams et le manifest aad
+Vous devriez avoir une sortie du style
 
+Forwarding                    http://XXXXX.ngrok.io -> http://localhost:5000                                                            
+Forwarding                    https://XXXXX.ngrok.io -> http://localhost:5000  
+
+5. Modifiez le manifeste teams avec le FQDN ngrok : XXXXX.ngrok.io
+
+6. Modifiez les Uri de redirection ainsi que l'uri de l'API exposée dans le portail Azure Active avec l'URI de forwarding fourni par ngrok
+
+Il est possible d'ouvrir le fichier manifeste de l'application Azure active Directory et faire un remplacement de toutes les occurrences.
+
+>Note : Avec la version gratuite de ngrok vous devrez répéter les points 5 et 6.
 
 ## Etape 4 : Installation de l'application dans Teams
 
-1. Zipper le manifest avec les deux images et installer l'application dans Teams.
+1. Zipper le manifeste avec les deux images et installer l'application dans Teams.
