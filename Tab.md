@@ -2,7 +2,7 @@
 
 Ce flux d'authentification originel, utilise des méthodes du [SDK client Teams](https://docs.microsoft.com/fr-fr/javascript/api/overview/msteams-client?view=msteams-client-js-latest), en conjonction avec les points d'entrées d'Azure Active Directory d'authentification et d'authorisation.
 
-En d'autres termes, il se suffit à lui même, il n'utilise pas de librairie tier pour l'acquisition de Jeton, mais exécute des requêtes HTTP directement sur les points d'entrées 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize' et 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
+En d'autres termes, il se suffit à lui même, il n'utilise pas de librairie tier pour l'acquisition de jeton, mais exécute des requêtes HTTP directement sur les points d'entrées 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize' et 'https://login.microsoftonline.com/common/oauth2/v2.0/token'
 
 Vous retrouverez les exemples de code ici
 
@@ -46,9 +46,7 @@ Cette authentification ce fait selon les étapes suivantes :
 
     ![consent](./images/TabConsentement.png)
 
-    >Notes : Cette page de consentements, ne sera affichée qu'une seule fois. D'autre part, avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
-
-    ![Credential](./images/TabCredentiels.png)
+    >Note : Cette page de consentements, ne sera affichée qu'une seule fois. 
 
     ## tabauthenticationstart.html
 
@@ -79,7 +77,10 @@ Cette authentification ce fait selon les étapes suivantes :
     });
     ```
 
-    En lieu et place du flux [d'authentification implicite](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-implicit-grant-flow), il est **désormais conseillé** d'utiliser le flux [d'authenfication par code](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-auth-code-flow) pour une application à page unique (SPA).
+    En lieu et place du flux [d'authentification implicite](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-implicit-grant-flow), il est **désormais préférable** d'utiliser le flux [d'authenfication par code](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-auth-code-flow) pour une application à page unique (SPA).
+
+    >_Note : les navigateurs vont sans doute à terme, bloquer l'utilisation de [cookies tiers](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/reference-third-party-cookies-spas)  et comme le flux implicite ne fonctionne pas sans cookies, cela entrainera le blocage de l'application._
+
 
     La mise en place de ce flux d'authorisation par code, va s'effectuer en échangeant une clé entre la page et le fournisseur d'identité, connue sous le nom de PKCE ([Proof Key For Code Exchange](https://datatracker.ietf.org/doc/html/rfc7636)).
     
