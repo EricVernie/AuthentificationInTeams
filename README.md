@@ -133,6 +133,7 @@ Si vous développez une application en mode SAAS, multi-tenant
     Copiez le secret et sauvegardez le pour une utilisation future.
 
 7. Sélectionnez *Exposer une API**
+
     7.1 Sélectionnez URI ID d'application **Définir**
 
     7.2 Entrez exactement api://FQDN/{Client ID}
@@ -231,7 +232,7 @@ Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'
 
 6. Modifiez les Uri de redirection ainsi que l'uri de l'API exposée dans le portail Azure Active avec l'URI de forwarding fourni par ngrok
 
-    Il est possible d'ouvrir le fichier manifeste de l'application Azure active Directory et faire un remplacement de toutes les occurrences.
+    Il est possible d'ouvrir le fichier manifeste de l'application Azure Active Directory et faire un remplacement de toutes les occurrences.
 
 >Note : Avec la version gratuite de ngrok vous devrez répéter les points 5 et 6 et réinstaller l'application dans teams 
 
