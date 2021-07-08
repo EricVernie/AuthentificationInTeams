@@ -233,5 +233,6 @@ Il est possible d'ouvrir le fichier manifeste de l'application Azure active Dire
 
 1. Zipper le manifeste avec les deux images et installer l'application dans Teams.
 
+1.1 [Télécharger votre application dans Microsoft Teams](https://docs.microsoft.com/fr-fr/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 >Note : Vérifiez que les fenêtres contectuelles soient bien permises.
 Ne fonctionne pas dans la version 1.4.00.18264 du client Teams de bureau

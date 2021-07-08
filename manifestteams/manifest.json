@@ -26,7 +26,7 @@
   "staticTabs": [
     {
       "entityId": "tabsso",
-      "name": "SSO",
+      "name": "Authentification SSO",
       "contentUrl": "https://www.fdd.com/sso/sso.html",
       "websiteUrl": "https://www.fdd.com",
       "scopes": [
@@ -35,7 +35,7 @@
     },
     {
       "entityId": "tabsilent",
-      "name": "Silent",
+      "name": "Authentification Silencieuse",
       "contentUrl": "https://www.fdd.com/silent/tabsilentauthenticationstart.html",
       "websiteUrl": "https://www.fdd.com",
       "scopes": [
@@ -44,7 +44,7 @@
     },
     {
       "entityId": "tabauthentication",
-      "name": "Authentication",
+      "name": "Authentification Onglet",
       "contentUrl": "https://www.fdd.com/tab/tabauthenticate.html",
       "websiteUrl": "https://www.fdd.com",
       "scopes": [
