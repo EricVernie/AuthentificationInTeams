@@ -151,7 +151,7 @@ Cette authentification ce fait selon les étapes suivantes :
         }
     ```
 
-    Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/tab/tabauthenticate.html_** qui sera traitée par la méthode **_failureCallback_**
+    Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/tab/tabauthenticate.html_**  (méthode **_failureCallback_**)
 
     Si l'authentification réussie, on va utiliser ce **code** afin d'obtenir un jeton.
 
@@ -164,13 +164,13 @@ Cette authentification ce fait selon les étapes suivantes :
     |**_grant_type_**| Spécifie quel flux d'authorisation nous utilisons|
     | **_code_verifier_**| Le code de vérification à utiliser, qui doit être en adéquation avec celui utilisé lors de l'authentification |
 
-    Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(result)_** est invoquée et renvoie le résultat à la page **_/tab/tabauthenticate.html_** qui sera traité par la méthode **_successCallback_**
+    Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(result)_** est invoquée et renvoie le résultat à la page **_/tab/tabauthenticate.html_** (méthode **_successCallback_**)
 
     Si l'authenfication réussie, vous devriez obtenir le jeton d'accès comme illustré sur la figure suivante :
 
     ![Token](./images/TabToken.png)
 
-    Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
+    >Note : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
 
 
 ## Parcourir les autres méthodes d'authentification

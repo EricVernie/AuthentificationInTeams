@@ -1,4 +1,4 @@
-#  [L'authentification en mode silencieux](https://docs.microsoft.com/fr-fr/microsoftteams/platform/concepts/authentication/authentication)
+#  [Authentification en mode silencieux](https://docs.microsoft.com/fr-fr/microsoftteams/platform/concepts/authentication/authentication)
 
 Pour cette méthode d'authentification, nous allons essentiellement utiliser la librairie [MSAL.js v2 pour navigateur](https://github.com/AzureAD/microsoft-authentication-library-for-js/tree/dev/lib/msal-browser)
 
@@ -43,7 +43,7 @@ function MSALLoginPopup() {
     }
 ```
 
-Tout d'abord on instancie la class **_msal.PublicClientApplication()_** en lui passant les paramètres Azure Active Directory définis de la manière suivante : 
+Tout d'abord on instancie la class **_msal.PublicClientApplication()_** en lui passant les paramètres Azure Active Directory définis de la manière suivante.
 
 ```JS
 const msalConfig = {
@@ -64,7 +64,7 @@ cache: {
 |**_authority_**|Point d'entré Azure Active Directory|
 |**_redirectUri_**|Url qui sera rappelée par Azure Active Directory. Il est important que lors de l'enregistrement de l'application sur Azure Active Directory de bien la mentionner. Pour l'inscription d'une application sur Azure Active Directory se référrer à l'article [Inscription d'une application SPA](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/scenario-spa-app-registration#redirect-uri-msaljs-20-with-auth-code-flow) |
 
-Si l'utilisateur c'est déjà connecté on récupère son compte pour l'utiliser dans la demande silencieuse du Jeton
+Si l'utilisateur est déjà connecté on récupère son compte pour l'utiliser dans la demande silencieuse du jeton.
 
 ```JS
     var currentAccount = MSALApp.getAccountByUsername(context.upn)S
@@ -75,7 +75,7 @@ Si l'utilisateur c'est déjà connecté on récupère son compte pour l'utiliser
      };
 ```
 
-Ensuite on va essayer d'obtenir un Jeton de manière silencieuse et afficher le jeton
+Ensuite on va essayer d'obtenir un jeton de manière silencieuse et l'afficher.
 
 ```JS
     MSALApp.acquireTokenSilent(silentRequest).then(tokenResponse => {
@@ -88,9 +88,6 @@ C'est alors que l'on demande à l'utilisateur de s'authentifier et d'approuver l
 
 ![consent](./images/SilentConsentement.png)
 
->Notes : Cette page de consentement, ne sera affichée qu'une seule fois. D'autre part, avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
-
-![Credential](./images/SilentCredentiels.png)
 
 Vous aurez noté, qu'il est possible de récupèrer le context Microsoft Teams dans lequel tourne l'application. **_microsoftTeams.getContext(function (context)_**.
 

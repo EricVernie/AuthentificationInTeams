@@ -1,10 +1,10 @@
-# [L'authentification SSO](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)
+# [Authentification SSO](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso)
 
-Le single Sign-On (SSO) ou authentification unique en Français, permet à l’utilisateur de se connecter une seule fois et d’accéder aux services sans être obligé de ré-entrer ces informations d'identification.
+Le Single Sign-On (SSO) ou authentification unique en Français, permet à l’utilisateur de se connecter une seule fois et d’accéder aux services sans être obligé de ré-entrer ces informations d'identification.
 
 Accéder aux services dans notre cas serait de récupèrer un jeton oauth2 d'accès, pour exécuter une requête sur [l'API Microsoft Graph](https://docs.microsoft.com/fr-fr/graph/api/overview?view=graph-rest-1.0)
 
-Il est possible avec le [SDK Client Teams](https://docs.microsoft.com/fr-fr/javascript/api/overview/msteams-client?view=msteams-client-js-latest) d'obtenir un Jeton d'accès à l'aide la méthode **_getAuthToken()_**.
+Il est désormais possible avec le [SDK Client Teams](https://docs.microsoft.com/fr-fr/javascript/api/overview/msteams-client?view=msteams-client-js-latest) d'obtenir un jeton à l'aide la méthode **_getAuthToken()_**.
 
 ```JS
 function GetTeamsToken() {
@@ -21,23 +21,21 @@ function GetTeamsToken() {
 }
 ```
 
-Ce jeton pourrait faire l'affaire si vous le passiez à votre propre API qui pourrait le valider et autoriser l'accès.
-
-Néanmoins, il n'est porteur que de peut d'autorisations (email, profile, offline_access and OpenId), ce qui n'est pas suffisant lorsqu'on souhaite accéder à d'autres ressources proposées par l'API Graph par exemple.
+Ce jeton pourrait faire l'affaire si vous le passiez à votre propre API qui pourrait le valider et autoriser l'accès. Néanmoins, il n'est porteur que de peut d'autorisations (email, profile, offline_access and OpenId), ce qui n'est pas suffisant lorsqu'on souhaite accéder à d'autres ressources proposées par l'API Microsoft Graph.
 
 On va donc utiliser le flux d'autorisation [on-behalf-of](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow), afin d'obtenir; au nom de l'utilisateur authentifié sur Microsoft Teams; un jeton d'accès porteur de plus d'autorisations.
 
-Tout d'abord il nous faut un middleware, une API Backend, qui va nous permettre :
+Tout d'abord il nous faut une API Backend qui va nous permettre :
 
-1. De valider le Jeton obtenu par la méthode **_getAuthToken()_**, afin d'autoriser l'appelant.
+1. De valider le jeton obtenu par la méthode **_getAuthToken()_**, afin d'autoriser l'appelant.
 
 >Note : Même si cela n'est pas indispensable pour mettre en place le flux on-behalf-of, c'est une bonne pratique à utiliser en terme de sécurité.
 
-2. Une méthode qui va utiliser le flux on-behalf-of et retourner le Jeton d'accès obtenu.
+2. Une méthode qui va obtenir via le flux on-behalf-of un nouveau jeton.
 
-Pour illustrer notre propos, nous avons deux projets séparés, l'un pour .NET et l'autre pour node.js, à vous de choisir.
+Pour illustrer notre propos, nous avons deux projets séparés, l'un en .NET et l'autre en node.js.
 
->Remarque : Dans ces exemples les API Backend retournent les jetons d'accès. En conditions réels vous utiliseriez ces jetons directement dans l'API Backend afin de requêter les API Graph.
+>Remarque : Dans ces exemples les API Backend retournent les jetons d'accès. En conditions réels vous utiliseriez ces jetons directement dans l'API Backend afin de requêter les API Microsoft Graph.
 
 Pour .NET nous utilisons la librairie [Microsoft.Identity.Web](https://github.com/AzureAD/microsoft-identity-web) pour protéger notre API backend.
 
@@ -81,7 +79,7 @@ La configuration pour Azure Active Directory se trouve dans le fichier appsettin
 
 >**Il ne faut **JAMAIS** laisser de secret dans son application. Mais pour des raisons de simplicité ici je l'accepte. Néanmoins il est préférable d'utiliser des services externes pour protéger les secrets, comme des coffres forts, style Azure Keyvault.
 
-La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le service **_ITokenAcquisition_** qu'il sera possible d'utiliser dans le controller **_authController.cs_**, afin d'obtenir un jeton d'accès avec le flux on-behalf-of.
+La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le service **_ITokenAcquisition_** que l'ou utilisera dans le controller **_authController.cs_**.
 
 ## authController.cs
 
@@ -112,9 +110,9 @@ La méthode **_.EnableTokenAcquisitionToCallDownstreamApi()_** va exposer le ser
   }
 ```
 
->Remarque : Vous trouverez également en commentaire dans le code C# une seconde manière d'acquerir un jeton à l'aide cette fois-ci de la librairie [MSAL.NET](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet).
+>Note : Vous trouverez également en commentaire dans le code C# une seconde manière d'acquerir un jeton à l'aide cette fois-ci de la librairie [MSAL.NET](https://github.com/AzureAD/microsoft-authentication-library-for-dotnet).
 
-On injecte dans le constructeur le service **_ITokenAcquisition_** qui expose la méthode **_.GetAccessTokenForUserAsync()_** afin d'obtenir le jeton d'accès que l'on retourne à l'appellant.
+On injecte dans le constructeur le service **_ITokenAcquisition_** qui expose la méthode **_.GetAccessTokenForUserAsync()_** qui permet d'acquierir le nouveau jeton.
 
 Pour node.js, nous utiliserons des librairies [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) et [jwks-rsa](https://www.npmjs.com/package/jwks-rsa) pour la validation du jeton.
 
@@ -157,7 +155,7 @@ const getSigningKeys = (header, callback) => {
 }
 ```
 
-Ensuite pour obtenir le jeton d'accès avec le flux on-behalf-of, nous utiliserons la librairie [MSAL.JS V2 pour node.js](https://www.npmjs.com/package/@azure/msal-node)
+Ensuite pour obtenir le nouveau jeton, nous utiliserons la librairie [MSAL.JS V2 pour node.js](https://www.npmjs.com/package/@azure/msal-node)
 
 ```JS
 app.get('/token',validateJwt, (req,res) => {
@@ -218,7 +216,7 @@ function GetServerSideToken() {
 }
 ```
 
-Si l'appel de l'API backend réussi, on affiche le jeton d'accès.
+Si l'appel de l'API backend réussi, on affiche le nouveau jeton.
 
 Néanmoins la 1ere fois que l'application est utilisée par l'utilisateur de Microsoft Teams, il y a de grandes chances qu'elle échoue comme illustré sur la figure suivante :
 
@@ -226,7 +224,7 @@ Néanmoins la 1ere fois que l'application est utilisée par l'utilisateur de Mic
 
 Le code d'erreur **invalid_grant** signifie que l'utilisateur doit consentir des droits à l'application.
 
-Dans ce cas là nous allons déclencher la méthode **_MSALRequestConsent()_**
+Dans ce cas là, nous allons déclencher la méthode **_MSALRequestConsent()_**
 
 ```JS
 function MSALRequestConsent() {            
@@ -288,13 +286,9 @@ C'est la méthode **_msaClient.LoginRedirect()_** qui affichera la page d'authen
 
 ![consent](./images/SSOConsentements.png)
 
->Note : Avec les clients Teams de Bureau ou Mobile, il est possible que vous ayez une page qui vous demande de vous authentifier.
+Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/SSO/SSO.html_** (méthode **_failureCallback_**)
 
-![Credential](./images/SSOCredentiels.png)
-
-Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailure(error)_** est invoquée et renvoie l'erreur à la page **_/SSO/SSO.html_** traitée par la méthode **_failureCallback_**
-
- Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(tokenResponse)_** est invoquée et renvoie le résultat à la page **_/SSO/SSO.html_** traité par la méthode **_successCallback_**
+ Si la demande de jeton réussie, la méthode **_microsoftTeams.authentication.notifySuccess(tokenResponse)_** est invoquée et renvoie le résultat à la page **_/SSO/SSO.html_** (méthode **_successCallback_**)
 
  Enfin, vous devriez obtenir une page comme illustré sur la figure suivante.
 
