@@ -73,6 +73,11 @@ Du faite que nous ayons à implémenter le flux on-behalf-of, nous avons besoin 
 
 Si vous souhaitez aller plus loin voir la [Documentation officielle](https://docs.microsoft.com/fr-fr/microsoftteams/platform/tabs/how-to/authentication/auth-aad-sso) 
 
+## Quand utiliser l'une ou l'autre des méthodes ?
+
+Si vous développez une application en mode SAAS, multi-tenant 
+
+
 ## Utilisation de l'application
 
 ### Etape 1: Inscrire une application Azure Active Directory
@@ -231,8 +236,25 @@ Il est possible d'ouvrir le fichier manifeste de l'application Azure active Dire
 
 ## Etape 4 : Installation de l'application dans Teams
 
-1. Zipper le manifeste avec les deux images et installer l'application dans Teams.
+1. Zipper le manifeste avec les deux images.
 
-1.1 [Télécharger votre application dans Microsoft Teams](https://docs.microsoft.com/fr-fr/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
->Note : Vérifiez que les fenêtres contectuelles soient bien permises.
-Ne fonctionne pas dans la version 1.4.00.18264 du client Teams de bureau
+2. [Télécharger votre application dans Microsoft Teams](https://docs.microsoft.com/fr-fr/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
+
+
+## Notes : 
+* Pour le client Web, vérifiez que les fenêtres contectuelles soient bien permises.
+
+* Ne fonctionne pas dans la version 1.4.00.18264 du client Teams de bureau
+
+* A des fins de tests, il est possible de supprimer les consentements utilisateurs
+    1. Sur [le portail Azure Active Directory](https://aad.portal.azure.com)
+
+    2. Sélectionnez dans le panneau gacuhe **Azure Active Directory**
+
+    3. Puis sélectionnez **Applications d'entreprise**
+
+    4. Recherchez et éditez l'application 
+
+    5. Séléctionnez **Propriétés** puis cliquez sur le bouton **Supprimer**
+
+        >Note: Cette action ne supprime pas l'application Azure Active Directory que vous avez au préalablement inscrit à l'étape 1
