@@ -219,20 +219,20 @@ Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'
 
     L'application démarre sur le port 5000.
 
-4. Exécutez ngrok afin d'exposer tunnel : **ngrok http 5000 --host-header=localhost:5000**
+4. Exécutez [ngrok](https://ngrok.com/download) : **ngrok http 5000 --host-header=localhost:5000**
 
-Vous devriez avoir une sortie du style
+    Vous devriez avoir une sortie du style
 
-Forwarding                    http://XXXXX.ngrok.io -> http://localhost:5000                                                            
-Forwarding                    https://XXXXX.ngrok.io -> http://localhost:5000  
+    Forwarding                    http://XXXXX.ngrok.io -> http://localhost:5000                                                            
+    Forwarding                    https://XXXXX.ngrok.io -> http://localhost:5000  
 
-5. Modifiez le manifeste teams avec le FQDN ngrok : XXXXX.ngrok.io
+5. Modifiez le manifeste Microsoft Teams avec le FQDN ngrok : XXXXX.ngrok.io
 
 6. Modifiez les Uri de redirection ainsi que l'uri de l'API exposée dans le portail Azure Active avec l'URI de forwarding fourni par ngrok
 
-Il est possible d'ouvrir le fichier manifeste de l'application Azure active Directory et faire un remplacement de toutes les occurrences.
+    Il est possible d'ouvrir le fichier manifeste de l'application Azure active Directory et faire un remplacement de toutes les occurrences.
 
->Note : Avec la version gratuite de ngrok vous devrez répéter les points 5 et 6 et réinstaller l'application dans teams
+>Note : Avec la version gratuite de ngrok vous devrez répéter les points 5 et 6 et réinstaller l'application dans teams 
 
 ## Etape 4 : Installation de l'application dans Teams
 
@@ -240,11 +240,11 @@ Il est possible d'ouvrir le fichier manifeste de l'application Azure active Dire
 
 2. [Télécharger votre application dans Microsoft Teams](https://docs.microsoft.com/fr-fr/microsoftteams/platform/concepts/deploy-and-publish/apps-upload)
 
+## Notes :
 
-## Notes : 
 * Pour le client Web, vérifiez que les fenêtres contectuelles soient bien permises.
 
-* Ne fonctionne pas dans la version 1.4.00.18264 du client Teams de bureau
+* Ne fonctionne pas dans la version 1.4.00.18264 du client Teams de bureau.
 
 * A des fins de tests, il est possible de supprimer les consentements utilisateurs
     1. Sur [le portail Azure Active Directory](https://aad.portal.azure.com)
