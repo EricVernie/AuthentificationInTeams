@@ -101,7 +101,14 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
 
     5.2 Choisissez  **Application à page unique**
 
-    5.3 Dans le champ **URI de redirection** entrez l'uri suivante : https://FQDN/Tab/tabauthenticationend.html et https://FQDN/Silent/tabsilentauthenticationend.html
+    5.3 Dans le champ **URI de redirection** entrez les uri suivantes :
+         https://FQDN/Tab/tabauthenticationend.html
+
+         https://FQDN/Silent/tabsilentauthenticationend.html
+
+         https://FQDN/Popup/authPopupRedirect.html
+
+        Remplacez FQDN par le FQDN que vous allez utiliser.
 
     >**Ne pas cocher les cases Jetons d'accès, ni Jetons d'ID**
 
@@ -113,8 +120,7 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
 
     5.7 Dans le champ **URI de redirection** entrez l'uri suivante : https://FQDN/auth-end
 
-    >Note : Pour l'uri de redirection, il faudra rentrer votre nom de domaine, l'hôte sur lequel l'application tourne.
-    Si vous utilisez un service de tunneling tel que ngrok pour la version gratuite, vous devez mettre à jour cette valeur chaque fois que votre sous-domaine ngrok change.
+    Remplacez FQDN par le FQDN que vous allez utiliser.
 
 6. Sélectionnez **Certificats & Secrets**
     6.1 Cliquez sur **+ Nouveau Secret**
@@ -125,8 +131,7 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
 
     7.2 Entrez exactement api://FQDN/{Client ID}
 
-    >Note : Si vous utilisez un service de tunneling tel que ngrok pour la version gratuite, vous devez mettre à jour cette valeur chaque fois que votre sous-domaine ngrok change.
-
+    Remplacez FQDN par le FQDN que vous allez utiliser.
 
     7.3 Sélectionnez **Ajouter une étendue**. Dans le panneau qui s’ouvre, entrez **access_as_user** comme nom d’étendue.
 
@@ -212,7 +217,7 @@ Forwarding                    https://XXXXX.ngrok.io -> http://localhost:5000
 
 Il est possible d'ouvrir le fichier manifeste de l'application Azure active Directory et faire un remplacement de toutes les occurrences.
 
->Note : Avec la version gratuite de ngrok vous devrez répéter les points 5 et 6.
+>Note : Avec la version gratuite de ngrok vous devrez répéter les points 5 et 6 et réinstaller l'application dans teams
 
 ## Etape 4 : Installation de l'application dans Teams
 
