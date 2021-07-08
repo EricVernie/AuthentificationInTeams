@@ -301,10 +301,6 @@ Si une erreur survient, la méthode **_microsoftTeams.authentication.notifyFailu
 
 ![Token](./images/SSOToken.png)
 
-## Utilisation de l'application 
-
-[Voir](./SetupTheApp.md)
-
 ## Parcourir les autres méthodes d'authentification
 
 [Authentification dans les onglets](./Tab.md)

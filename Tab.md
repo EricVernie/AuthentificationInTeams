@@ -171,11 +171,8 @@ Cette authentification ce fait selon les étapes suivantes :
 
     Remarque : Avec cette méthode d'authentification, à chaque chargement de la page, une fenêtre Popup s'affiche et se ferme automatiquement.
 
-## Utilisation de l'application 
 
-[Voir](./SetupTheApp.md)
-
-## Autres méthodes d'authentification
+## Parcourir les autres méthodes d'authentification
 
 [Authentification en mode silencieux](./Silent.md)
 

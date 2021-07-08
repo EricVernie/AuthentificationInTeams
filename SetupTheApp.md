@@ -8,7 +8,7 @@
 
     [Inscription dans Azure Active Directory](./InscriptionAAD.md)
 
-3. Mettez à jour avec les informations obtenues lors de l'enregistrement de l'application :
+3. Mettez à jour le code avec les informations obtenues lors de l'enregistrement de l'application :
 
     3.1 Pour .NET à la section **AzureAD** dans le fichier **appsettings.json**.
     
@@ -16,14 +16,14 @@
         {
         "AzureAd": {
             "Instance": "https://login.microsoftonline.com/",
-            "Domain": "[NOM DE DOMAINE]",
+            "Domain":   "[NOM DE DOMAINE]",
             "Audience": "[CLIENT ID]", 
             "TenantId": "[TENANT ID]", 
             "ClientId": "[CLIENT ID]", 
             "ClientSecret": "CLIENT SECRET",    
         },
     ```
-    et dans le fichier **ValideIssuers.cs** le numéro du locataire
+    dans le fichier **ValideIssuers.cs** le numéro du locataire
     
     ```CSHARP
      public static string[] GetListIssuers()
@@ -57,12 +57,14 @@
         },
     ```
 
-    3.4 Modifiez le fichier **Manifest\manifest.json** de microsoft teams en conséquence et déployez l'application dans Teams
+    3.4 Modifiez le fichier **Manifest\manifest.json** de microsoft teams en conséquence et déployez l'application dans Teams.
+    
     Créez un nouvel ID d'application et remplacez la section **id**
+    
 
     Remplacez **https://yyy.yyyy.com** par votre FQDN
 
-    Et enfin à la section **webApplicationInfo** remplacez le l'id par votre client id et la resource
+    Et enfin à la section **webApplicationInfo** indiquez le Client id et l'uri de la ressource.
 
     ```JSON
         {
@@ -132,4 +134,3 @@
         }
     }
     ```
-
