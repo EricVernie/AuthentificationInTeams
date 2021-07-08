@@ -77,7 +77,6 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
 
 ### Etape 1: Inscrire une application Azure Active Directory
 
-
 1. Connectez-vous au portail [Azure Active Directory](https://aad.portal.azure.com)
 2. Selectionnez dans le panneau à gauche **Azure Active Directory**
 3. Puis sélectionnez **Inscriptions d'applications**
@@ -103,6 +102,7 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
     5.2 Choisissez  **Application à page unique**
 
     5.3 Dans le champ **URI de redirection** entrez l'uri suivante : https://FQDN/Tab/tabauthenticationend.html et https://FQDN/Silent/tabsilentauthenticationend.html
+
     >**Ne pas cocher les cases Jetons d'accès, ni Jetons d'ID**
 
     5.4 Cliquez le bouton **configurer**
@@ -160,146 +160,36 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
 8. Sélectionnez **API autorisées**. Sélectionnez **+ Ajouter une autorisation Microsoft** puis  > **Microsoft Graph** > **Autorisations déléguées**, puis ajoutez les   autorisations suivantes à partir de l'API Graph :
     User.Read activé par défaut, email, offline_access, OpenId, profil
 
-Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'application**, **Le Secret de l'application**, **Le numéro de locataire Azure Active Directory**
+Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'application**, **Le Secret de l'application**, **Le numéro de locataire Azure Active Directory**, les réutiliserons à l'étape 2.
 
-Nous les réutiliserons dans la configuration de l'application
-
-### Etapes 2 : Mise à jour du code.
+### Etapes 2 : Mise à jour du code
 
 1. .NET
 
-    1.1 Dans le fichier [appsettings.json](./aspnet.core/appsettings.json) Modifiez les paramètres **Audience**, la section **AzureAd** du fichier  avec les informations 
+    1.1 Dans le fichier [appsettings.json](./aspnet.core/appsettings.json) modifiez les paramètres **Audience**, **TenantId**, **ClientId** et **ClientSecret** de la section **AzureAd** avec les valeurs obtenues à l'étape 1.
 
+    1.2 Dans le fichier [authConfig.js](./aspnet.core/scripts/authConfig.js) , modifiez la propriété **clientId** avec la valeur obtenue à l'étape 4.1 lors de l'inscription de l'application dans Azure Active Directory
 
+2. Node.js
 
+    2.1 Dans le fichier [server.js](./node.js/server.js) modifiez les paramètres **clientId**, **authority**, et **clientSecret** avec les valeurs obtenues à l'étape 1.
 
->**Il ne faut **JAMAIS** laisser de secret dans son application. Mais pour des raisons de simplicité ici je l'accepte. Néanmoins il est préférable d'utiliser des services externes pour protéger les secrets, comme des coffres forts, style Azure Keyvault.
+    2.2 Dans le fichier [authConfig.js](./node.js/scripts/authConfig.js) , modifiez la propriété **clientId** avec la valeur obtenue à l'étape 4.1 lors de l'inscription de l'application dans Azure Active Directory
 
-3. Mettez à jour le code avec les informations obtenues lors de l'enregistrement de l'application :
-
-    3.1 Pour .NET à la section **AzureAD** dans le fichier **appsettings.json**.    
-    ```JSON
-        {
-        "AzureAd": {
-            "Instance": "https://login.microsoftonline.com/",            
-            "Audience": "[CLIENT ID]", 
-            "TenantId": "[TENANT ID]", 
-            "ClientId": "[CLIENT ID]", 
-            "ClientSecret": "CLIENT SECRET",    
-        },
-    ```
-    dans le fichier **ValideIssuers.cs** le numéro du locataire
+### Etape 3 : Mise à jour du fichier [Manifest de Teams ](./manifestteams/manifest.json)
     
-    ```CSHARP
-     public static string[] GetListIssuers()
-        {
-            
-            return new string[] { 
-                "https://login.microsoftonline.com/[TENANT ID]/v2.0"};
-        }
-    ```
+1. Créez un nouveau GUID d'application et remplacez le parametre **"id":"[APPLICATION ID]"**
 
-    3.2  Pour node.js dans le fichier **server.js**.
+2. Pour la section **staticTabs** remplacez toutes les propriétés **"contentUrl":** avec votre FQDN, ou alors si vous testez en locale avec ngrok par un FQDN du type XXXXX.ngrock.io.
 
-    ```JS
-        const config = {
-            auth: {
-                clientId: "[CLIENT ID]"
-                authority: "https://login.microsoftonline.com/[TENANT ID]", 
-                clientSecret: "[CLIENT SECRET]",
-            }
-        };
-    ```
+3. Enfin à la section **webApplicationInfo** indiquez le Client id et l'uri de la ressource qui doit être de la forme api://FQDN/[CLIENT ID].
 
-    3.3 Dans le fichier **\scripts\authConfig.js**, copiez l'**ID d'application (client)** obtenu à l'étape 4.1 lors de l'inscription de l'application dans le champ **clientId**
 
-    ```JS
-    const msalConfig = {
-        auth: {
-        clientId: "[CLIENT ID]", 
-            authority: "https://login.microsoftonline.com/common", 
-            redirectUri: window.location.origin + "/Silent/tabsilentauthenticationend.html"        
-        },
-    ```
-
-    3.4 Modifiez le fichier **Manifest\manifest.json** de microsoft teams en conséquence et déployez l'application dans Teams.
-    
-    Créez un nouvel ID d'application et remplacez la section **id**
-    
-
-    Remplacez **https://yyy.yyyy.com** par votre FQDN
-
-    Et enfin à la section **webApplicationInfo** indiquez le Client id et l'uri de la ressource.
-
-    ```JSON
-        {
-        "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.9/MicrosoftTeams.schema.json",
-        "manifestVersion": "1.9",
-        "version": "1.0.0",
-        "id": "[APPLICATION ID]",
-        "packageName": "com.teams.ev.fdd",
-        "developer": {
-            "name": "[Auteur]",
-            "websiteUrl": "https://yyy.yyyy.com",
-            "privacyUrl": "https://yyy.yyyy.com/privacy",
-            "termsOfUseUrl": "https://yyy.yyyy.com/termsofuse"
-        },
-        "icons": {
-            "color": "bot-icon-192x192.png",
-            "outline": "bot-icon-outline-32x32.png"
-        },
-        "name": {
-            "short": "Training Auth",
-            "full": "Training GSP"
-        },
-        "description": {
-            "short": "Training Auth in Teams 2021-06",
-            "full": "Demos Teams"
-        },
-        "accentColor": "#0EA20E",
-        "staticTabs": [
-            {
-            "entityId": "tabsso",
-            "name": "SSO",
-            "contentUrl": "https://yyy.yyyy.com/sso/sso.html",
-            "websiteUrl": "https://yyy.yyyy.com",
-            "scopes": [
-                "personal"
-            ]
-            },
-            {
-            "entityId": "tabsilent",
-            "name": "Silent",
-            "contentUrl": "https://yyy.yyyy.com/silent/tabsilentauthenticationstart.html",
-            "websiteUrl": "https://yyy.yyyy.com",
-            "scopes": [
-                "personal"
-            ]
-            },
-            {
-            "entityId": "tabauthentication",
-            "name": "Authentication",
-            "contentUrl": "https://yyy.yyyy.com/tab/tabauthenticate.html",
-            "websiteUrl": "https://yyy.yyyy.com",
-            "scopes": [
-                "personal"
-            ]
-            }
-        ],
-        "permissions": [
-            "identity",
-            "messageTeamMembers"
-        ],
-        "validDomains": [
-            "*.yyyy.com"
-        ],
-        "webApplicationInfo": {
-            "id": "[CLIENT ID]",
-            "resource": "api://yyy.yyyy.com/[CLIENT ID]"
-        }
-    }
-    ```
+## Etape 3 : Test en local
 
 1. Clonez le code
 
     git clone https://github.com/EricVernie/AuthentificationInTeams.git
+
+2. pour .
+
