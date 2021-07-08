@@ -7,7 +7,7 @@
 <body>
     <h1>
     
-    <a href="https://github.com/EricVernie/AuthentificationInTeams/blob/main/Tab.md"
+    <a href="https://github.com/EricVernie/AuthentificationInTeams/blob/main/tab.md"
        target="_blank" title="Tutoriels auth">Authentifier un utilisateur dans un onglet Microsoft Teams</a>
     </h1>
     <p/>
@@ -25,7 +25,7 @@
             Authenticate();
         });
 
-        // Utilisation du SDK Teams pour l'authentification
+        // Utilisation du SDK Teams pour l'authenfication
         function Authenticate() {
             microsoftTeams.initialize();
             microsoftTeams.getContext((context) => {
@@ -41,7 +41,8 @@
                         $('#Error').text("Login failed: " + reason);
                     }
                 });
-            });            
+            });
+            return true;
         }
     </script>
 
