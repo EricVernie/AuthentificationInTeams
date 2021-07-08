@@ -128,6 +128,7 @@ Si vous développez une application en mode SAAS, multi-tenant
     Remplacez FQDN par le FQDN que vous allez utiliser.
 
 6. Sélectionnez **Certificats & Secrets**
+
     6.1 Cliquez sur **+ Nouveau Secret**
     Copiez le secret et sauvegardez le pour une utilisation future.
 
