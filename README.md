@@ -230,7 +230,7 @@ Avant de continuer, assurez-vous que vous avez bien copié, **Le client ID de l'
 
 5. Modifiez le manifeste Microsoft Teams avec le FQDN ngrok : XXXXX.ngrok.io
 
-6. Modifiez les Uri de redirection ainsi que l'uri de l'API exposée dans le portail Azure Active avec l'URI de forwarding fourni par ngrok
+6. Modifiez les Uri de redirection ainsi que l'uri de l'API exposée dans le portail Azure Active Directory avec l'URI de forwarding fourni par ngrok
 
     Il est possible d'ouvrir le fichier manifeste de l'application Azure Active Directory et faire un remplacement de toutes les occurrences.
 
