@@ -51,7 +51,7 @@ Si vous souhaitez aller plus loin voir la [Documentation officielle](https://doc
 
 ## Authentification SSO
 
-Arrivée plus récement, elle permet de récupèrer en un seul appel de fonction le jeton de l'utilisateur authentifié. 
+Arrivée plus récemment, elle permet de récupèrer en un seul appel de fonction le jeton de l'utilisateur authentifié. 
 
 Néanmoins ce jeton n'étant porteur que d'un ensemble limité d'autorisations (email, profile,offline_access and OpenId ), il faudra l'utiliser en conjonction avec le flux oauth2 [on-behalf-of](https://docs.microsoft.com/fr-fr/azure/active-directory/develop/v2-oauth2-on-behalf-of-flow) afin d'obtenir des autorisations plus importantes pour l'API Microsoft Graph.
 
